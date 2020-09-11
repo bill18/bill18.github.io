@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Project 1: QuantLib Python Library Extension | Wenhua Wang</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.74.3" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="https://bill18.github.io/portfolio/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+    
+    <meta property="og:title" content="Project 1: QuantLib Python Library Extension" />
+<meta property="og:description" content="An Extension to the QuantLib Python Library." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bill18.github.io/portfolio/post/project-1/" />
+<meta property="article:published_time" content="2020-05-09T10:58:08-04:00" />
+<meta property="article:modified_time" content="2020-05-09T10:58:08-04:00" />
+<meta itemprop="name" content="Project 1: QuantLib Python Library Extension">
+<meta itemprop="description" content="An Extension to the QuantLib Python Library.">
+<meta itemprop="datePublished" content="2020-05-09T10:58:08-04:00" />
+<meta itemprop="dateModified" content="2020-05-09T10:58:08-04:00" />
+<meta itemprop="wordCount" content="3019">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Project 1: QuantLib Python Library Extension"/>
+<meta name="twitter:description" content="An Extension to the QuantLib Python Library."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://bill18.github.io/portfolio/images/nature-2813487_1920.jpg');">
+    <div class="pb3-m pb6-l bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://bill18.github.io/portfolio/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Wenhua Wang
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://bill18.github.io/portfolio/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://bill18.github.io/portfolio/contact/" title="Contact page">
+              Contact
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://bill18.github.io/portfolio/post/" title="Projects page">
+              Projects
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+<a href="https://www.linkedin.com/in/WenhuaWang/" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+<a href="https://github.com/bill18" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">Project 1: QuantLib Python Library Extension</h1>
+          
+            <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+              An Extension to the QuantLib Python Library.
+            </h2>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        PROJECTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=https://bill18.github.io/portfolio/post/project-1/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=https://bill18.github.io/portfolio/post/project-1/&amp;text=Project%201:%20QuantLib%20Python%20Library%20Extension" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://bill18.github.io/portfolio/post/project-1/&amp;title=Project%201:%20QuantLib%20Python%20Library%20Extension" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Project 1: QuantLib Python Library Extension</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2020-05-09T10:58:08-04:00">May 9, 2020</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="quantlib-extension">QuantLib Extension</h1>
+<h2 id="introduction">Introduction</h2>
+<p>QuantLib is a well known free and open source quantitative library for finance. It has interfaces in Python, Java, R, etc. which was generated with SWIG. It is gradually accepted by financial engineering and researcher over the world. But because of the lacking of documentation, the adoption process is slow. There are two books &ldquo;Implementing Quantlib &ndash; An Inside Look at Quantitative Finance in C++&rdquo; written by Luigi Ballabio and &ldquo;Quantlib Python Cookbook &ndash; Hands-on Quantitative Finance in Python&rdquo; by Goutham Balaraman and Luigi Ballabio. But it seems, these books are not easy for most of the readers. The objective of this project is provide an easy extension to QuantLib Python by absorbing my long time experiences in the industry.</p>
+<p>All my extensions will <strong>be compatible</strong> with the existing interfaces.</p>
+<p>Here&rsquo;s the critical ones:</p>
+<ul>
+<li>
+<p>Make QuantLib Python functions/methods accept both Object and symbol, for example, many Quantitative Library in wall street companies allow developers use symbol, such as &ldquo;Act/Act&rdquo; to represent Actual Actual day counting basis while QuantLib only allows objects of class AcutalActual. This is not convenient in practice when building pricing and risk applications.</p>
+</li>
+<li>
+<p>Make QuantLib Python functions/methods accept dates in YYYYMMDD format. This will not only make code cleaner but also save developers and researchers a lot of time in constructing Date objects.</p>
+</li>
+<li>
+<p>Create a centralized calendar manager, which allows you load calendar from centralized repository by protocols such as http/https/file, or database access. Strategy pattern will be used. URL based loader (supports protocols such as http, https, file), and loaders for SQLite and MySql will be provided. Users can create their owner loaders for other database, e.g. Oracle, MongoDB, etc. very easily.</p>
+</li>
+<li>
+<p>Create a centralized schedule manager, which allows you load bond/swap schedules from centralized repository by http/https, file system, or database. Strategy pattern will be used.</p>
+</li>
+<li>
+<p>Extend all critical classes to make them accept both symbols and objects. Decorator pattern will be used.</p>
+</li>
+<li>
+<p>Design a generic curve builder based on QuantLib Python.</p>
+</li>
+</ul>
+<p>I&rsquo;m going to explain the idea behind it be giving an example which was written in original QuantLib python, and show you how it looks like when the extension is used. Then, I&rsquo;m going to introduce the symbol matching extension, calendar manager, schedule manager, curve builder, etc. respectively.</p>
+<h2 id="an-example">An Example</h2>
+<p>The following example was from <a href="http://gouthamanbalaraman.com/blog/quantlib-bond-modeling.html">http://gouthamanbalaraman.com/blog/quantlib-bond-modeling.html</a>.
+There&rsquo;s no technical or calculation problem in this example, but we can make it simpler.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> QuantLib <span style="color:#f92672">as</span> ql
+
+todaysDate <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>Date(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2015</span>)
+ql<span style="color:#f92672">.</span>Settings<span style="color:#f92672">.</span>instance()<span style="color:#f92672">.</span>evaluationDate <span style="color:#f92672">=</span> todaysDate
+spotDates <span style="color:#f92672">=</span> [ql<span style="color:#f92672">.</span>Date(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2015</span>), ql<span style="color:#f92672">.</span>Date(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">2015</span>), ql<span style="color:#f92672">.</span>Date(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2016</span>)]
+spotRates <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.005</span>, <span style="color:#ae81ff">0.007</span>]
+dayCount <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>Thirty360()
+calendar <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>UnitedStates()
+interpolation <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>Linear()
+compounding <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>Compounded
+compoundingFrequency <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>Annual
+spotCurve <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>ZeroCurve(spotDates, spotRates, dayCount, calendar, interpolation,
+                         compounding, compoundingFrequency)
+spotCurveHandle <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>YieldTermStructureHandle(spotCurve)
+
+issueDate <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>Date(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2015</span>)
+maturityDate <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>Date(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2016</span>)
+tenor <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>Period(ql<span style="color:#f92672">.</span>Semiannual)
+calendar <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>UnitedStates()
+bussinessConvention <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>Unadjusted
+dateGeneration <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>DateGeneration<span style="color:#f92672">.</span>Backward
+monthEnd <span style="color:#f92672">=</span> False
+schedule <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>Schedule(issueDate, maturityDate, tenor, calendar, bussinessConvention,
+                       bussinessConvention, dateGeneration, monthEnd)
+<span style="color:#75715e"># list(schedule)</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;--- schedule ---&#39;</span>)
+<span style="color:#66d9ef">for</span> dt <span style="color:#f92672">in</span> schedule:
+    <span style="color:#66d9ef">print</span>(dt)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;--- schedule ---&#39;</span>)
+
+<span style="color:#75715e"># Now lets build the coupon</span>
+dayCount <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>Thirty360()
+couponRate <span style="color:#f92672">=</span> <span style="color:#f92672">.</span><span style="color:#ae81ff">06</span>
+coupons <span style="color:#f92672">=</span> [couponRate]
+
+<span style="color:#75715e"># Now lets construct the FixedRateBond</span>
+settlementDays <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+faceValue <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+fixedRateBond <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>FixedRateBond(
+    settlementDays, faceValue, schedule, coupons, dayCount)
+
+<span style="color:#75715e"># create a bond engine with the term structure as input;</span>
+<span style="color:#75715e"># set the bond to use this bond engine</span>
+bondEngine <span style="color:#f92672">=</span> ql<span style="color:#f92672">.</span>DiscountingBondEngine(spotCurveHandle)
+fixedRateBond<span style="color:#f92672">.</span>setPricingEngine(bondEngine)
+
+<span style="color:#75715e"># Finally the price</span>
+npv <span style="color:#f92672">=</span> fixedRateBond<span style="color:#f92672">.</span>NPV()
+
+<span style="color:#66d9ef">print</span>(npv)
+
+</code></pre></div><pre><code>--- schedule ---
+January 15th, 2015
+July 15th, 2015
+January 15th, 2016
+--- schedule ---
+105.27653992490683
+</code></pre>
+<p>From the above example, the following should be done when we calculate NPV for a fixed rate bond:</p>
+<ul>
+<li>
+<p>create simple objects for calendar, day count convention, interpolation method, etc.</p>
+</li>
+<li>
+<p>build a curve</p>
+</li>
+<li>
+<p>generate schedule for the bond</p>
+</li>
+<li>
+<p>create a bond</p>
+</li>
+<li>
+<p>create a pricing engine</p>
+</li>
+</ul>
+<p>Many companies opt to build curves and store in a centralized repository to be shared by all applications and all researchers.</p>
+<p>Similarly, many companies opt to store schedules in databases to avoid code changes when schedules need to be modified.</p>
+<p>On the other hand, developers and researchers prefer passing symbols for day count conventions, rolling conventions, etc. Many applications are data driven, when we need to have a way to translate symbols to objects anyway. It will be convenient if the library understand both symbols and corresponding objects.</p>
+<p>Most of the researchers and developers prefer the following form of code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> ext.QuantLibClassExt <span style="color:#f92672">as</span> qlx
+<span style="color:#f92672">import</span> ext.SimpleCurveManager <span style="color:#f92672">as</span> mgr
+
+todaysDate <span style="color:#f92672">=</span> <span style="color:#ae81ff">20150115</span>
+dayCount <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;30/360&#39;</span>
+schedule <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;BD20160115&#39;</span>
+coupons <span style="color:#f92672">=</span> [<span style="color:#f92672">.</span><span style="color:#ae81ff">06</span>]
+settlementDays <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+faceValue <span style="color:#f92672">=</span> <span style="color:#ae81ff">100.0</span>
+
+<span style="color:#75715e"># setEvalDate(todaysDate)</span>
+spotCurve <span style="color:#f92672">=</span> mgr<span style="color:#f92672">.</span>ZeroCurve(todaysDate, <span style="color:#e6db74">&#39;ZC001&#39;</span>)
+
+fixedRateBond <span style="color:#f92672">=</span> qlx<span style="color:#f92672">.</span>FixedRateBond(
+    settlementDays, faceValue, schedule, coupons, dayCount,
+    curve<span style="color:#f92672">=</span>spotCurve, engine<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;DiscountingBond&#39;</span>)
+
+npv <span style="color:#f92672">=</span> fixedRateBond<span style="color:#f92672">.</span>NPV()
+
+<span style="color:#66d9ef">print</span>(npv)
+
+</code></pre></div><pre><code>105.27653992490683
+</code></pre>
+<p><strong>How was the above achived?</strong></p>
+<p>This was based on the extension for QuantLib Python, which will be discussed in the following sections. The simple curve data was put in a json file named <em><em>ZC001</em>.json</em>, the schedule was put in a file named <strong>BD20160115.json</strong>. These can also be put in database. It might be clearer to put them in JSON files for illustration purposes, because people will have less settings, no dependencies on any databases.</p>
+<h2 id="directory-tree-of-quantlib-python-extension">Directory Tree of QuantLib Python Extension</h2>
+<p>By default this project organize files as following. Many sub-directories are optional, for example if you download calendars and schedules from web services or fetch them from database you don&rsquo;t need <strong>calendars</strong> and <strong>schedules</strong>.</p>
+<pre><code>├───calendars
+├───config
+├───curves
+│   └───input &lt;curve marks&gt;
+├───db
+├───docs
+│   └─── &lt;documents&gt;
+├───examples
+├───ext
+│   └─── &lt;python code&gt;
+└───schedules
+    └─── &lt;schedule files&gt;
+</code></pre><ul>
+<li>
+<p>If schedules are put in database or web service you don&rsquo;t need &ldquo;schedules&rdquo; sub-directory</p>
+</li>
+<li>
+<p>If calendars are put in database or web service you don&rsquo;t need &ldquo;calendars&rdquo; sub-directory</p>
+</li>
+<li>
+<p>db sub-directory is only needed if you decide to use Sqlite 3 to store calendars, schedules, curve input, etc.</p>
+</li>
+</ul>
+<p>For simplicity we suppose to use file system in the following sections.</p>
+<h2 id="class-and-enum-mapping">Class and Enum Mapping</h2>
+<p>In reality, developers and reaschers deal with symbols, for example when dealing with day count basis we usually &ldquo;Act/Act&rdquo;, &ldquo;Act/360&rdquo;, &ldquo;30/360&rdquo;, when dealing with calendars we use &ldquo;TGT&rdquo; for TARGET, &ldquo;NYX&rdquo; for New York Stock Exchange, etc. Programs are usually data driven, almost no one hard coded business conventions.</p>
+<p>Since different company may use different symbols and to make symbol lookup case insensative, I&rsquo;ve defined symbol-object map as JSON file <strong>QuantLibConfig.json</strong> under <strong>config</strong> directory. Definitely, this can be saved in Databases.</p>
+<p>You can modify the configurations according to your needs as long as the keys are not duplicated. For example, business day rolling conventions are pref-defined as following:</p>
+<pre><code>&quot;ROLL_CONV_MAP&quot; : {
+	   &quot;FOLLOWING&quot;        : &quot;Following&quot;,
+	   &quot;MODIFIEDFOLLOWING&quot;: &quot;ModifiedFollowing&quot;,
+	   &quot;PRECEDING&quot;        : &quot;Preceding&quot;,
+	   &quot;MODIFIEDPRECEDING&quot;: &quot;ModifiedPreceding&quot;,
+	   &quot;UNADJUSTED&quot;       : &quot;Unadjusted&quot;,
+	   &quot;HALFMONTHMODIFIEDFOLLOWING&quot;: &quot;HalfMonthModifiedFollowing&quot;,
+	   &quot;F&quot;   : &quot;Following&quot;,
+	   &quot;MF&quot;  : &quot;ModifiedFollowing&quot;,
+	   &quot;P&quot;   : &quot;Preceding&quot;,
+	   &quot;MP&quot;  : &quot;ModifiedPreceding&quot;,
+	   &quot;U&quot;   : &quot;Unadjusted&quot;,
+	   &quot;HMMF&quot;: &quot;HalfMonthModifiedFollowing&quot;
+	},
+</code></pre><p>All key words are in capital letters. Multiple keys can map to the same class, in the above example &ldquo;FOLLOWING&rdquo; and &ldquo;F&rdquo; both mean &ldquo;Following&rdquo; rolling convention class. The mappers will do case-insensitative lookup by converting given key works to upper case first.</p>
+<p>TODO: Add more tetails here.</p>
+<h2 id="class-extentions">Class Extentions</h2>
+<p>It would be conevient if those functions/methods which accept objects of specific classes can also accept symbols, e.g. &ldquo;Act/Act&rdquo;, dates in YYYYMMDD format</p>
+<h3 id="design-patterns---decorator--composite">Design Patterns - Decorator &amp; Composite</h3>
+<p>The decorator pattern describes a way to add or remove behaviour to/from a function dynamically. When we decorate a class, we need to use it with Composite pattern. The callables used for the function composition should be hold independently by a Composer object.</p>
+<p>The following is quoted from <a href="https://python-patterns.guide/gang-of-four/decorator-pattern/#implement-dynamic-wrapper">https://python-patterns.guide/gang-of-four/decorator-pattern/#implement-dynamic-wrapper</a></p>
+<blockquote>
+<p>A very common approach to the Decorator Pattern in Python is the <strong>dynamic wrapper</strong>. Instead of trying to implement a method and property for every method and attribute on the wrapped object, a dynamic wrapper intercepts live attribute accesses as the program executes and responds by trying to access the same attribute on the wrapped object.</p>
+</blockquote>
+<blockquote>
+<p>A dynamic wrapper implements the dunder methods getattr(), setattr(), and — if it really wants to be feature-complete — delattr() and responds to each of them by performing the equivalent operation on the wrapped object. Because getattr() is only invoked for attributes that are in fact missing on the wrapper, the wrapper is free to offer real implementations of any methods or properties it wants to intercept.</p>
+</blockquote>
+<blockquote>
+<p>There are a few edge cases that prevent every attribute access from being handled with getattr(). For example, if the wrapped object is iterable, then the basic operation iter() will fail on the wrapper if the wrapper is not given a real iter() method of its own. Similarly, even if the wrapped object is an iterator, next() will fail unless the wrapper offers a real next(), because these two operations examine an object’s class for dunder methods instead of hitting the object directly with a getattr().</p>
+</blockquote>
+<blockquote>
+<p>As a result of these special cases, a getattr-powered wrapper usually involves at least a half-dozen methods in addition to the methods you specifically want to specialize.</p>
+</blockquote>
+<p>A sample decorator is as below:</p>
+<pre><code>class DynamicDecorator(object):
+    def __init__(self, to_be_decorated):
+        self._to_be_decorated = to_be_decorated
+
+
+    def func01(self, *args, **kargs):
+        # do you decoration here
+        self._to_be_decorated.func01(*args, **kargs)
+
+
+    def func02(self, *args, **kargs):
+        # do you decoration here
+        self._to_be_decorated.func02(*args, **kargs)
+
+    ...
+
+    def __iter__(self):
+        return self.__dict__['_to_be_decorated'].__iter__()
+
+    def __next__(self):
+        return self.__dict__['_to_be_decorated'].__next__()
+
+    def __getattr__(self, name):
+        return getattr(self.__dict__['_to_be_decorated'], name)
+
+    def __setattr__(self, name, value):
+        # you can setattr for this or fo the following
+        setattr(self..__dict__['_to_be_decorated'], name, value)
+
+    def __delattr__(self, name):
+        delattr(self.__dict__['_to_be_decorated'], name)
+        
+</code></pre><h3 id="term-strcture-decorator">Term Strcture Decorator</h3>
+<p>TBD</p>
+<h3 id="curve-engine-decorator">Curve Engine Decorator</h3>
+<p>TBD</p>
+<h3 id="bond-decorator">Bond Decorator</h3>
+<p>TBD</p>
+<h3 id="swap-decorator">Swap Decorator</h3>
+<p>TBD</p>
+<p>&hellip;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><h2 id="calendar-manager">Calendar Manager</h2>
+<p>The Calendar Manager makes users can choose to use their own calendars or to use the QuantLib built-in calendar classes.
+QuantLib uses classes/functions to generate calendars by rules. This makes applications less flexible, for example, sometimes holidays might be changed. Modifying code may introduce bugs. On the other hand, most of the developers and researchers who use QuantLib may not have the ability to modify and rebuild QuantLib and QuantLib SWIG wrappers. It is necessay to design a calendar manager which on one hand is compatible with all the QuantLib functions, on the other hand allows users use their calendars stored in either file system, various database, or web services.</p>
+<p>Another consideration is that different company may use different calendar symbol/ID, we must provide a way to let user define their own symbols/IDs and map their own symbols/IDs to their own source of calendars.</p>
+<p>The Calendar Manager defines an <strong>&ldquo;index&rdquo;</strong> named <strong>Calendar.idx</strong> under *config&rdquo; folder, where you can define your own calendar code and specify the source of their calendars. For example, if you use file system you can do the following:</p>
+<pre><code>CODE, Name                           , URL
+----------------------------------------------
+FED , UnitedStates.FederalReserve    , FED.cal
+GOV , UnitedStates.GovernmentBond    , GOV.cal
+LOR , UnitedStates.LiborImpact       , LOR.cal
+NER , UnitedStates.NERC              , NER.cal
+NYX , UnitedStates.NYSE              , NYX.cal
+USD , UnitedStates.Settlement        , USC.cal
+LDX , UnitedKingdom.Exchange         , LDX.cal
+MTL , UnitedKingdom.Metals           , MTL.cal
+UKC , UnitedKingdom.Settlement       , UKC.cal
+BRC , Brazil.Settlement              , BRC.cal
+BRX , Brazil.Exchange                , BRX.cal
+CAC , Canada.Settlement              , CAC.cal
+TSX , Canada.TSX                     , TSX.cal
+IBC , China.IB                       , IBC.cal
+SSE , China.SSE                      , SSE.cal
+PSE , CzechRepublic.PSE              , PSE.cal
+EUX , Germany.Eurex                  , EUX.cal
+FSX , Germany.FrankfurtStockExchange , FSX.cal
+DEC , Germany.Settlement             , DEC.cal
+XTA , Germany.Xetra                  , XTA.cal
+BEJ , Indonesia.BEJ                  , BEJ.cal
+JSX , Indonesia.JSX                  , JSX.cal
+ILC , Israel.Settlement              , ILC.cal
+TAX , Israel.TASE                    , TAX.cal
+ITX , Italy.Exchange                 , ITX.cal
+ITC , Italy.Settlement               , ITC.cal
+MOX , Russia.MOEX                    , MOX.cal
+RUC , Russia.Settlement              , RUC.cal
+KRX , SouthKorea.KRX                 , KRX.cal
+KRC , SouthKorea.Settlement          , KRC.cal
+HKX , HongKong.HKEx                  , HKX.cal
+ICX , Iceland.ICEX                   , ICX.cal
+NSE , India.NSE                      , NSE.cal
+BMV , Mexico.BMV                     , BMV.cal
+TDL , SaudiArabia.Tadawul            , TDL.cal
+SGX , Singapore.SGX                  , SGX.cal
+SKX , Slovakia.BSSE                  , SKX.cal
+TSE , Taiwan.TSEC                    , TSE.cal
+UAX , Ukraine.USE                    , UAX.cal
+ARC , Argentina                      , ARC.cal
+AUC , Australia                      , AUC.cal
+BWC , Botswana                       , BWC.cal
+DKC , Denmark                        , DKC.cal
+FIC , Finland                        , FIC.cal
+HUC , Hungary                        , HUC.cal
+JPC , Japan                          , JPC.cal
+NZC , NewZealand                     , NZC.cal
+NOC , Norway                         , NOC.cal
+PLC , Poland                         , PLC.cal
+ROC , Romania                        , ROC.cal
+ZAC , SouthAfrica                    , ZAC.cal
+SEC , Sweden                         , SEC.cal
+CHC , Switzerland                    , CHC.cal
+THC , Thailand                       , THC.cal
+TRC , Turkey                         , TRC.cal
+TGT , TARGET                         , TGT.cal
+FRX , None                           , FRX.cal
+FRC , None                           , FRX.cal
+WEO , WeekendsOnly                   ,
+
+</code></pre><p>The URL can be something like <strong><a href="http://intranet.youcorp.com/cal?USD">http://intranet.youcorp.com/cal?USD</a></strong> or <strong>&ldquo;file:////C:/QuantLibExt/calendars/USD.cal&rdquo;</strong>. If you put it as simple as &ldquo;USD.cal&rdquo; then our CalendarManager will try to find it from the <strong>calendar</strong> sub-directory of the pre-defined directory tree described in previous sections.</p>
+<h3 id="design-patterns">Design Patterns</h3>
+<h4 id="singleton-pattern">Singleton Pattern</h4>
+<p>Calendars and schedule are static, it is unnecessary to create objects every time when we use them. Initializing objects is costly, it not only takes time but also consumes memory. Singleton is a way to provide one and only one object of a particular type. To accomplish this, you must take control of object creation out of the hands of the programmer. One convenient way to do this is to delegate to a single instance of a private nested inner class. Because Python provices method <strong>getattr</strong> and also allows developers implement their own <strong>getattr</strong> method be overriding <strong><strong>getattr</strong></strong>, this makes singleton implementation in python is a little than doing it in Java and C++.</p>
+<p>A typical Singleton in Python looks like:</p>
+<pre><code>class SimpleSingleton:
+    class __SimpleSingleton:
+        def __init__(self, *args, **kargs):
+            # do initialization here
+            
+        def method1(self, *args, **kargs):
+            # define method1
+
+        def method2(self, *args, **kargs):
+            # define method2
+
+    # declare class variable
+    instance = None
+
+    def __init__(self, *args, **kargs):
+        if not SimpleSingleton.instance:
+            SimpleSingleton.instance = SimpleSingleton.__SimpleSingleton(*args, **kargs)
+
+    # deligate the attribute lookup method to the inner class
+    def __getattr__(self, name):
+        return getattr(self.instance, name)
+</code></pre><h4 id="strategy-pattern">Strategy Pattern</h4>
+<p>An important consideration for the Calendar Manager is to allow users design their own data loaders. An URL based loader for loading data from web service and file system, and one for loading data from SQLite have been provided. Users can simply model these to implement their own loaders for Oracle, MS SQL Server, MySQL, MongoDB, etc.</p>
+<p>Strategy Pattern serves this algorithm or procedure substitution purposes.</p>
+<p><img src="https://bill18.github.io/portfolio/images/strategy_pattern.png" alt="Strategy Pattern" title="Strategy Pattern"></p>
+<h4 id="calendar-format">Calendar Format</h4>
+<p>Calendars define holidays, if you&rsquo;d like to store calendars in files, then each calendar will have its own file with the calendar ID as its file names, e.g. &ldquo;USD.cal&rdquo;</p>
+<pre><code>...
+20180101
+20180115
+20180219
+20180528
+20180704
+20180903
+20181008
+20181112
+20181122
+20181225
+20190101
+20190121
+20190218
+20190527
+20190704
+20190902
+20191014
+20191111
+20191128
+20191225
+20200101
+20200120
+20200217
+20200525
+20200703
+20200907
+20201012
+20201111
+20201126
+20201225
+20210101
+20210118
+20210215
+20210531
+20210705
+20210906
+20211011
+...
+</code></pre><p>Calendar Manager is widely used in the extentions to the existing classes and static functions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><h2 id="schedule-manager">Schedule Manager</h2>
+<p>In practice, financial companies opt to maintain schedule of bonds, swaps, etc. in centralized repositories. This is because:</p>
+<ul>
+<li>
+<p>program generated schedule are not always correct. Although QuantLib provides very powerful and flexible functions for schedule generation, not all developers can make it good.</p>
+</li>
+<li>
+<p>try to avoid modifying programs if schedules are changed.</p>
+</li>
+<li>
+<p>centralized schedules can be shared by multiple applications, it is easy to make the schedules consistent among all applications.</p>
+</li>
+</ul>
+<h3 id="design-patterns-1">Design Patterns</h3>
+<p>Schedule Manager uses <strong>singleton</strong> and <strong>strategy</strong> patterns as we did in Calendar Manager.</p>
+<h3 id="the-repository">The Repository</h3>
+<p>Schedules can be fetched from file system, or web services. This can be configured in your application by specifying URL pattern in configuration file ScheduleConfig.json</p>
+<pre><code>{
+	&quot;URL&quot;:&quot;C:\\QuantLibExt\\schedules\\{0}.json&quot;
+}
+</code></pre><p>The above configuration will be ignored if databases are used.</p>
+<h3 id="schedule-file-format">Schedule File Format</h3>
+<p>Example</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">{
+    <span style="color:#e6db74">&#34;calendar&#34;</span>: <span style="color:#e6db74">&#34;NYX&#34;</span>,
+    <span style="color:#e6db74">&#34;dates&#34;</span>: [
+        <span style="color:#ae81ff">20150102</span>,
+        <span style="color:#ae81ff">20150202</span>,
+        <span style="color:#ae81ff">20150302</span>,
+        <span style="color:#ae81ff">20150401</span>,
+        <span style="color:#ae81ff">20150501</span>,
+        <span style="color:#ae81ff">20150601</span>,
+        <span style="color:#ae81ff">20150701</span>,
+        <span style="color:#ae81ff">20150803</span>,
+        <span style="color:#ae81ff">20150901</span>,
+        <span style="color:#ae81ff">20151001</span>,
+        <span style="color:#ae81ff">20151102</span>,
+        <span style="color:#ae81ff">20151201</span>,
+        <span style="color:#ae81ff">20160104</span>
+    ],
+    <span style="color:#e6db74">&#34;rolling&#34;</span>: <span style="color:#e6db74">&#34;F&#34;</span>
+}
+</code></pre></div><p>TODO: add more details here</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div><h2 id="curve-builder">Curve Builder</h2>
+<p>Building curve is not a simple task. Curves should be built and saved in centralized repositories. All the applications should share the same curves instead of building them and using them separately.</p>
+<p>Market data should be collected and saved in centralized repositories too.</p>
+<p>The QuantLib Extension desinged two modules for curve building, one for simple curves, another for curves with multiple intruments.</p>
+<h3 id="simple-curve-builder">Simple Curve Builder</h3>
+<p>We&rsquo;ve used the SimpleCurveManager in the <strong>Introduction</strong> section. The following is a sample curve mark:</p>
+<pre><code>{
+	&quot;basis&quot;: &quot;30/360&quot;,
+	&quot;calendar&quot;: &quot;USD&quot;,
+	&quot;interpolation&quot;: &quot;Linear&quot;,
+	&quot;compounding&quot;: &quot;Compounded&quot;,
+	&quot;frequency&quot;: &quot;Annual&quot;,
+	&quot;marks&quot;: [
+		[20150115, 0.0  ], 
+		[20150715, 0.005], 
+		[20160115, 0.007]]
+
+}
+</code></pre><p>Creating a simple curve is as simple as below:</p>
+<pre><code>curve = mgr.ZeroCurve(20150115, 'ZC001')
+</code></pre><p>To facilitate the demostration, let&rsquo;s define a curve plotting function.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">from</span> matplotlib.ticker <span style="color:#f92672">import</span> FuncFormatter
+<span style="color:#f92672">import</span> ext.QuantLibClassExt <span style="color:#f92672">as</span> qlx
+<span style="color:#f92672">import</span> ext.SimpleCurveManager <span style="color:#f92672">as</span> mgr
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plotCurve</span>(lineType, dates, rates):
+    pydt <span style="color:#f92672">=</span> [datetime<span style="color:#f92672">.</span>datetime(d<span style="color:#f92672">.</span>year(), d<span style="color:#f92672">.</span>month(), d<span style="color:#f92672">.</span>dayOfMonth())
+            <span style="color:#66d9ef">for</span> d <span style="color:#f92672">in</span> dates]
+    fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots()
+    fig<span style="color:#f92672">.</span>set_size_inches(<span style="color:#ae81ff">10.5</span>, <span style="color:#ae81ff">9.5</span>)
+    ax<span style="color:#f92672">.</span>yaxis<span style="color:#f92672">.</span>set_major_formatter(
+        FuncFormatter(<span style="color:#66d9ef">lambda</span> r, pos: <span style="color:#e6db74">&#39;{:.2%}&#39;</span><span style="color:#f92672">.</span>format(r)))
+    plt<span style="color:#f92672">.</span>subplots_adjust(bottom<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>)
+    l, <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>plot(pydt, rates, lineType)
+<span style="color:#75715e">#     plt.show()</span>
+</code></pre></div><p><strong>now build the curve</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># build the curve </span>
+curve <span style="color:#f92672">=</span> mgr<span style="color:#f92672">.</span>ZeroCurve(<span style="color:#ae81ff">20150115</span>, <span style="color:#e6db74">&#39;ZC001&#39;</span>)
+</code></pre></div><p><strong>check the curve</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># check the curve</span>
+<span style="color:#66d9ef">print</span>(curve<span style="color:#f92672">.</span>referenceDate())
+<span style="color:#66d9ef">print</span>(curve<span style="color:#f92672">.</span>dayCounter())
+today <span style="color:#f92672">=</span> curve<span style="color:#f92672">.</span>referenceDate()
+end <span style="color:#f92672">=</span> today <span style="color:#f92672">+</span> ql<span style="color:#f92672">.</span>Period(<span style="color:#ae81ff">1</span>, ql<span style="color:#f92672">.</span>Years)
+dates <span style="color:#f92672">=</span> [ql<span style="color:#f92672">.</span>Date(serial)
+         <span style="color:#66d9ef">for</span> serial
+         <span style="color:#f92672">in</span> range(today<span style="color:#f92672">.</span>serialNumber(), end<span style="color:#f92672">.</span>serialNumber() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)]    
+rates <span style="color:#f92672">=</span> [curve<span style="color:#f92672">.</span>zeroRate(dt, curve<span style="color:#f92672">.</span>dayCounter(), <span style="color:#e6db74">&#39;Simple&#39;</span>)<span style="color:#f92672">.</span>rate() <span style="color:#66d9ef">for</span> dt <span style="color:#f92672">in</span> dates]
+plotCurve(<span style="color:#e6db74">&#39;.&#39;</span>, dates, rates)
+</code></pre></div><pre><code>January 15th, 2015
+30/360 (Bond Basis) day counter
+</code></pre>
+<p><img src="https://bill18.github.io/portfolio/images/output_24_1.png" alt="png"></p>
+<h3 id="builder-for-curve-with-multiple-instruments">Builder for Curve with Multiple Instruments</h3>
+<p>The following article presents an example of building EONIA curve with multiple instruments and year end turns.
+<a href="https://leanpub.com/quantlibpythoncookbook/read">https://leanpub.com/quantlibpythoncookbook/read</a></p>
+<p>The curve is described as below:</p>
+<pre><code>{
+	&quot;Deposits&quot;: [
+	   {
+	      &quot;calendar&quot;: &quot;TGT&quot;,
+	      &quot;tenor&quot;: &quot;1d&quot;,
+	      &quot;rolling&quot;: &quot;F&quot;,
+	      &quot;basis&quot;: &quot;Act/360&quot;,
+	      &quot;month_end&quot;: false,
+	      &quot;marks&quot;: [
+	          [0, 0.0004], 
+	          [1, 0.0004], 
+	          [2, 0.0004] 
+	      ]
+	   }
+	],
+	&quot;OISs&quot;: [
+		{
+		    &quot;index&quot;:&quot;Eonia&quot;,
+		    &quot;settlementDays&quot;:2,
+		    &quot;marks&quot;:[
+		            [&quot;1W&quot;, 0.00070],
+		            [&quot;2W&quot;, 0.00069],
+		            [&quot;3W&quot;, 0.00078],
+		            [&quot;1M&quot;, 0.00074]
+		        ]
+		},
+		{
+		    &quot;index&quot;:&quot;Eonia&quot;,
+		    &quot;marks&quot;:[
+						[20130116, 20130213, 0.000460 ],
+						[20130213, 20130313, 0.000160 ],
+						[20130313, 20130410, -0.000070],
+						[20130410, 20130508, -0.000130],
+						[20130508, 20130612, -0.000140]
+		        ]
+		},
+		{
+		    &quot;index&quot;:&quot;Eonia&quot;,
+		    &quot;settlementDays&quot;:2,
+		    &quot;marks&quot;:[
+						[&quot;15M&quot;, 0.000020],
+						[&quot;18M&quot;, 0.000080],
+						[&quot;21M&quot;, 0.000210],
+						[&quot;2Y&quot; , 0.000360],
+						[&quot;3Y&quot; , 0.001270],
+						[&quot;4Y&quot; , 0.002740],
+						[&quot;5Y&quot; , 0.004560],
+						[&quot;6Y&quot; , 0.006470],
+						[&quot;7Y&quot; , 0.008270],
+						[&quot;8Y&quot; , 0.009960],
+						[&quot;9Y&quot; , 0.011470],
+						[&quot;10Y&quot;, 0.012800],
+						[&quot;11Y&quot;, 0.014040],
+						[&quot;12Y&quot;, 0.015160],
+						[&quot;15Y&quot;, 0.017640],
+						[&quot;20Y&quot;, 0.019390],
+						[&quot;25Y&quot;, 0.020030],
+						[&quot;30Y&quot;, 0.020380]
+		        ]
+		}		
+	],
+	&quot;Turns&quot;: {
+		&quot;days&quot;:[20121231],
+		&quot;values&quot;:[0.999994473276139]
+	}
+}
+
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> ext.Config <span style="color:#f92672">as</span> config
+<span style="color:#f92672">import</span> ext.CurveBuilder <span style="color:#f92672">as</span> builder
+
+asOfDate <span style="color:#f92672">=</span> <span style="color:#ae81ff">20121211</span>
+basis <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Act/365F&#39;</span>
+instFileUrl <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span>getCurveInputFile(<span style="color:#e6db74">&#39;eonia_bootstrap.json&#39;</span>)
+
+curve <span style="color:#f92672">=</span> builder<span style="color:#f92672">.</span>buildCurveWithJson(
+    <span style="color:#e6db74">&#39;PiecewiseLogCubicDiscount&#39;</span>,
+    asOfDate, basis, instFileUrl)
+
+data <span style="color:#f92672">=</span> curve<span style="color:#f92672">.</span>oneDayForwardRates(<span style="color:#e6db74">&#39;2Y&#39;</span>, <span style="color:#e6db74">&#39;TGT&#39;</span>, compounding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Simple&#39;</span>)
+
+
+plotCurve(<span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#f92672">**</span>data)
+</code></pre></div><p><img src="https://bill18.github.io/portfolio/images/output_26_0.png" alt="png"></p>
+<h2 id="todo">TODO</h2>
+<p>Add more details when I&rsquo;m free.</p>
+<p><a href="https://github.com/bill18/QuantLibExt">Link to GitHub Repository</a></p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://bill18.github.io/portfolio/" >
+    &copy;  Wenhua Wang 2020 
+  </a>
+    <div>
+
+
+
+
+
+
+
+<a href="https://www.linkedin.com/in/WenhuaWang/" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+<a href="https://github.com/bill18" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="https://bill18.github.io/portfolio/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>
