@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Quant Developer Portfolio on Wenhua Wang</title>
-    <link>https://bill18.github.io/portfolio/</link>
+    <link>https://bill18.github.io/</link>
     <description>Recent content in Quant Developer Portfolio on Wenhua Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 09 May 2020 10:58:08 -0400</lastBuildDate>
     
-	<atom:link href="https://bill18.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bill18.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Project 1: QuantLib Python Library Extension</title>
-      <link>https://bill18.github.io/portfolio/post/project-1/</link>
+      <link>https://bill18.github.io/post/project-1/</link>
       <pubDate>Sat, 09 May 2020 10:58:08 -0400</pubDate>
       
-      <guid>https://bill18.github.io/portfolio/post/project-1/</guid>
+      <guid>https://bill18.github.io/post/project-1/</guid>
       <description>QuantLib Extension Introduction QuantLib is a well known free and open source quantitative library for finance. It has interfaces in Python, Java, R, etc. which was generated with SWIG. It is gradually accepted by financial engineering and researcher over the world. But because of the lacking of documentation, the adoption process is slow. There are two books &amp;ldquo;Implementing Quantlib &amp;ndash; An Inside Look at Quantitative Finance in C++&amp;rdquo; written by Luigi Ballabio and &amp;ldquo;Quantlib Python Cookbook &amp;ndash; Hands-on Quantitative Finance in Python&amp;rdquo; by Goutham Balaraman and Luigi Ballabio.</description>
     </item>
     
     <item>
       <title>Project 2: Java Option Pricing Library</title>
-      <link>https://bill18.github.io/portfolio/post/project-2/</link>
+      <link>https://bill18.github.io/post/project-2/</link>
       <pubDate>Mon, 10 Apr 2017 11:00:59 -0400</pubDate>
       
-      <guid>https://bill18.github.io/portfolio/post/project-2/</guid>
+      <guid>https://bill18.github.io/post/project-2/</guid>
       <description>Option Functions and a calculaor UI in Java All the function models described in the book The complete guide to option pricing formulas by Espen Gaarder Haug were implemented in this project.
 It was done a while ago, I lost my original source code but found the jar file. The source code was mainly recovered from the jar.
 Part of the code has been rewritten with new features in Java 8, e.</description>
@@ -33,10 +33,10 @@ Part of the code has been rewritten with new features in Java 8, e.</description
     
     <item>
       <title>Contact</title>
-      <link>https://bill18.github.io/portfolio/contact/</link>
+      <link>https://bill18.github.io/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://bill18.github.io/portfolio/contact/</guid>
+      <guid>https://bill18.github.io/contact/</guid>
       <description>Follow me on these social media platforms.
    Platform URL     Website: https://bill18.github.io/   LinkedIn: https://www.linkedin.com/in/wenhua-w-39108190/   GitHub: https://bill18.github.io/    </description>
     </item>
