@@ -196,82 +196,145 @@
 
 <p>Quantitative finance libraries like QuantLib were designed for single-threaded desktop use. Running them in modern cloud environments — where concurrent pricing requests arrive from many clients — exposes their thread-safety assumptions. The typical response is a full rewrite, which is expensive, risky, and diverts resources from revenue-generating work.</p>
 
-<p>DistributeX takes a different approach. Rather than rewriting the libraries, it wraps them in process-level isolation with a lightweight orchestration layer. Unmodified legacy code runs safely in sandboxed child processes, scaled horizontally by adding more workers. The system speaks a common protocol across C++, Java, Python, and C#, so teams can keep using their language of choice.</p>
+<p>DistributeX takes a different approach. Rather than rewriting the libraries, it wraps them in process-level isolation with a lightweight orchestration layer. Unmodified legacy code runs safely in sandboxed child processes, scaled horizontally by adding more workers. The system supports polyglot workers across C++, Java, Python, C#, and VBA, all coordinated through a unified message broker.</p>
 
-<h2 id="high-level-architecture">High-level architecture</h2>
+<h2 id="architecture">Architecture</h2>
 
-<p><img src="../../distributex/images/architecture.png" alt="Architecture" title="DistributeX Architecture"></p>
+<p><img src="../../distributex/images/architecture.svg" alt="Architecture" title="DistributeX Architecture"></p>
 
-<p>At a glance:</p>
+<p>The system is designed as a <strong>Message Broker Driven</strong> architecture where transport protocols are decoupled from core computation via a unified envelope system:</p>
+
 <ul>
-<li>Clients (C++, Java, Python, C#) submit tasks via HTTP POST or WebSocket push.</li>
-<li>The C++ server hosts a TaskBroker (in-memory by default), BrokerController, and WorkerRegistry. WebSocket is the primary transport; HTTP serves as a fallback.</li>
-<li>Workers load language-specific plugins (.so, .jar, .py, .dll). Each task runs in an isolated process, so thread-unsafe libraries execute without contention or corruption.</li>
+<li><strong>Transport Adapters</strong> — HTTP, WebSocket, SSE, and MQ. Each adapter translates client requests into a standard <code>RequestEnvelope</code> and delivers responses via topic-based routing. The WebSocket++ server delegates to protocol-specific modules: <code>HttpPushPullModule</code> for REST, <code>SseModule</code> for streaming, and <code>MqClientGateway</code> for direct broker access.</li>
+<li><strong>Common Gateway Layer</strong> — <code>AuthService</code> handles JWT-based authentication and authorization, while <code>RequestSubmissionService</code> generates unique <code>request_id</code>, wraps payloads into <code>RequestEnvelope</code>s, and enqueues them into the broker.</li>
+<li><strong>Unified Broker Layer</strong> — The <code>IBroker</code> interface supports both pub/sub and durable queuing. <code>InMemoryBroker</code> (default) features visibility timeouts and retry logic. Swap in <code>NATSBroker</code> or <code>RedisBroker</code> for distributed deployments without changing application code.</li>
+<li><strong>Workers</strong> — Consume tasks from the broker, load language-specific plugins (<code>.so</code>, <code>.jar</code>, <code>.py</code>, <code>.dll</code>), and publish <code>ResponseEnvelope</code>s to response topics. C++ workers fork a child process per task for memory isolation; other languages use process-per-worker.</li>
 </ul>
 
-<p><img src="../../distributex/images/sequence.png" alt="Sequence" title="Task Lifecycle"></p>
+<p><img src="../../distributex/images/sequence.svg" alt="Sequence" title="Task Lifecycle"></p>
 
-<p>Key runtime details:</p>
+<p>The task lifecycle follows a consistent flow: a client submits a request through any transport adapter; the gateway authorizes and wraps it into a <code>RequestEnvelope</code> (containing <code>request_id</code>, <code>user_id</code>, <code>resp_topic</code>, and payload); the broker enqueues it; a worker consumes, executes, and publishes a <code>ResponseEnvelope</code> to the response topic; the <code>ResultRouter</code> dispatches the result back to the correct transport connection.</p>
+
+<h2 id="plugin-contracts">Plugin Contracts</h2>
+
+<p>Each worker plugin exposes a method map of JSON-in/JSON-out functions using language-native conventions:</p>
+
+<table>
+<thead>
+<tr><th>Language</th><th>Plugin Contract</th></tr>
+</thead>
+<tbody>
+<tr><td>C++</td><td><code>extern &quot;C&quot; std::map&lt;std::string, json(*)(const json&amp;)&gt; get_methods()</code></td></tr>
+<tr><td>Python</td><td><code>def get_methods() -&gt; dict[str, Callable]</code></td></tr>
+<tr><td>Java</td><td><code>public static Map&lt;String, Function&lt;JsonNode, JsonNode&gt;&gt; getMethods()</code></td></tr>
+<tr><td>C#</td><td><code>public static Dictionary&lt;string, Func&lt;JsonNode, JsonNode&gt;&gt; GetMethods()</code></td></tr>
+<tr><td>VBA</td><td><code>Public Function GetMethods() As Dictionary</code></td></tr>
+</tbody>
+</table>
+
+<p>Wrapping a legacy library requires ~30 lines of JSON marshalling. No changes to the original library are needed.</p>
+
+<h2 id="messaging-contracts">Message Contracts</h2>
+
+<p>The system uses standardized JSON envelopes for multi-language compatibility:</p>
+
 <ul>
-<li>TaskBroker is in-memory by default — fast and ephemeral. For distributed routing, swap in broker plugins backed by NATS or Redis.</li>
-<li>Worker plugins expose a method map using language-native conventions: C++ <code>extern "C" get_methods()</code>, Python <code>get_methods()</code>, Java <code>static getMethods()</code>, C# static factory methods.</li>
-<li>C++ workers support multiple child processes (<code>WORKER_PROCESSES</code>) for per-request isolation. Other languages run single-process.</li>
+<li><strong>RequestEnvelope</strong> (<code>request_envelope.h</code>) — contains <code>request_id</code>, <code>user_id</code>, <code>resp_topic</code>, and the task <code>payload</code>.</li>
+<li><strong>ResponseEnvelope</strong> (<code>response_envelope.h</code>) — contains <code>request_id</code>, <code>status</code>, and the computation <code>result</code>.</li>
 </ul>
 
-<h2 id="use-cases">Use cases</h2>
+<h2 id="server-internals">Server Internals</h2>
+
+<p>The C++ server at <code>cpp/server/server_main.cpp</code> initializes core services in a modular fashion:</p>
+
+<pre><code>auto msgBroker = make_broker(serverCfg.broker);
+AuthService authService(&amp;registry);
+RequestSubmissionService submissionService(msgBroker.get());
+ResultCache resultCache;
+HttpPushPullModule httpModule(&amp;authService, &amp;submissionService, &amp;resultCache);
+SseModule sseModule(&amp;authService, &amp;submissionService, &amp;sseRegistry);
+ResultRouter resultRouter(msgBroker.get(), ...);
+resultRouter.start();
+auto server = setup_ws_server(..., &amp;httpModule, &amp;sseModule);
+</code></pre>
+
+<h2 id="broker-layer">Pluggable Broker Layer</h2>
+
+<p>The <code>IBroker</code> interface is the backbone of the system. Implementations include:</p>
+
+<ul>
+<li><strong>InMemoryBroker</strong> — default for single-node deployments. Features visibility timeouts, nack/requeue, and async dispatch to local subscribers.</li>
+<li><strong>NATSBroker</strong> — NATS-backed for multi-cloud, durable, high-throughput routing.</li>
+<li><strong>RedisBroker</strong> — Redis pub/sub for lightweight distributed setups.</li>
+</ul>
+
+<p>All are interchangeable via configuration — no code changes required.</p>
+
+<h2 id="security">Authentication &amp; Security</h2>
+
+<p>Security follows a three-tier hierarchy:</p>
 
 <ol>
-<li><p><strong>Bond pricing</strong> — wrap a legacy C++ QuantLib plugin without making it thread-safe. Risk systems that need concurrent pricing of many instruments simply add more worker processes.</p></li>
-<li><p><strong>Monte Carlo simulations</strong> — wrap a Python/NumPy compute kernel. Parameter sweeps that are embarrassingly parallel and CPU-bound.</p></li>
-<li><p><strong>Cross-language orchestration</strong> — a Java plugin handles data ingestion, a C++ plugin runs the compute, and a Python post-processor generates reports. All coordinated through the same broker.</p></li>
+<li><strong>Transport Security</strong> — TLS for HTTP/WS/NATS connections.</li>
+<li><strong>Identity Security</strong> — JWT-based authentication (<code>AuthService</code>) for every request, with RSA-256 signed tokens.</li>
+<li><strong>Topic Security</strong> — Response topics are resolved server-side; clients cannot spoof their response destination.</li>
 </ol>
 
-<h2 id="plugin-contract">Plugin contract (Python)</h2>
+<h2 id="mcp-integration">AI Agent Integration (MCP)</h2>
 
-<pre><code>def get_methods():
-    return {"price_bond": price_bond}
+<p>DistributeX exposes a <strong>Model Context Protocol (MCP) server</strong> that gives AI agents access to the framework through standard tool calls:</p>
+
+<pre><code>Claude Desktop / Web / Custom App
+        ↓
+     MCP Server (Python)
+        ├─ submit_task     — fire a single computation
+        ├─ check_result    — non-blocking status check
+        ├─ wait_for_result — blocking wait until completion
+        ├─ batch_submit    — submit 1000s of tasks at once
+        └─ task_info       — full task metadata
+        ↓
+   DistributeX Framework
+        ↓
+    Worker Pool (100s of nodes)
 </code></pre>
 
-<h2 id="plugin-contract-c">Plugin contract (C++)</h2>
+<p><strong>Getting started:</strong></p>
 
-<pre><code>extern "C" std::map&lt;std::string, json(*)(const json&amp;)&gt; get_methods();
+<pre><code>pip install -r distributex/python/mcp/requirements_mcp.txt
+DISTRIBUTEX_URL=http://localhost:8080 \
+  python3 distributex/python/mcp/distributex_mcp_server.py
 </code></pre>
 
-<h2 id="demo">End-to-end demo (local simulation)</h2>
+<p>Then configure Claude Desktop to point to the MCP server and ask it to price bonds, run sensitivity analyses, or automate portfolio monitoring.</p>
 
-<p>The repo includes a runnable simulation that walks through the full task lifecycle without starting the C++ server:</p>
+<h2 id="use-cases">Use Cases</h2>
 
-<pre><code>python3 distributex/demos/use_case/run_usecase.py
-</code></pre>
+<ol>
+<li><strong>Bond pricing</strong> — wrap a legacy C++ QuantLib plugin without making it thread-safe. Risk systems that need concurrent pricing of many instruments simply add more worker processes.</li>
+<li><strong>Monte Carlo simulations</strong> — wrap a Python/NumPy compute kernel. Parameter sweeps that are embarrassingly parallel and CPU-bound.</li>
+<li><strong>Cross-language orchestration</strong> — a Java plugin handles data ingestion, a C++ plugin runs the compute, and a Python post-processor generates reports. All coordinated through the same broker.</li>
+<li><strong>AI-driven portfolio analysis</strong> — a Claude agent batch-submits pricing for 500 bonds across 5 yield curve scenarios, waits for results, computes Greeks, and returns trading recommendations — all autonomously.</li>
+</ol>
 
-<p>Expected output:</p>
+<h2 id="multilang-demos">Multi-language Demos</h2>
 
-<pre><code>Client: submit bond price task
-Task id: 3b4f1d2a-...
-Worker: polling and executing task...
-Worker processed task: 3b4f1d2a-...
-Client: poll result
-Result: {'status': 'completed', 'result': 1157.720...}
-</code></pre>
-
-<h2 id="multilang-demos">Multi-language demos</h2>
-
-<p>Each language has a standalone demo that exercises the same plugin contract:</p>
+<p>Each language has a standalone demo exercising the same plugin contract:</p>
 
 <ul>
 <li><strong>Python</strong>: <code>python3 distributex/demos/python/run_demo.py</code></li>
 <li><strong>C++</strong>: <code>cd distributex/demos/cxx &amp;&amp; mkdir build &amp;&amp; cd build &amp;&amp; cmake .. &amp;&amp; cmake --build .</code></li>
 <li><strong>Java</strong>: <code>cd distributex/demos/java &amp;&amp; mvn -q -DskipTests package &amp;&amp; java -cp target/article-java-demo-0.1.0.jar io.distributex.demo.PluginDemo</code></li>
 <li><strong>C#</strong>: <code>cd distributex/demos/csharp &amp;&amp; dotnet build -c Release &amp;&amp; dotnet run --project ArticleDemo.csproj -c Release</code></li>
+<li><strong>VBA</strong>: <code>cd distributex/demos/vba &amp;&amp; ...</code> (Excel macro)</li>
 </ul>
 
-<h2 id="tradeoffs">Trade-offs &amp; operational notes</h2>
+<h2 id="tradeoffs">Trade-offs &amp; Operational Notes</h2>
 
 <ul>
-<li>The in-memory TaskBroker is intentionally simple — swap in NATS or Redis broker plugins when you need cross-process routing and scale.</li>
-<li>WebSocket is preferred for low-latency push; HTTP polling remains available for firewalled or legacy environments.</li>
-<li>Process-level isolation is the recommended default for non-thread-safe libraries. It costs a fork per task but guarantees memory safety.</li>
-<li>Native libraries (QuantLib, etc.) need careful dependency management — set <code>LD_LIBRARY_PATH</code> or install to <code>~/.local/lib</code>.</li>
+<li>The in-memory broker is fast and ephemeral — swap in NATS or Redis for durable, cross-process routing.</li>
+<li>Per-task latency: ~10-100ms (network + process spawn + compute). Not suitable for microsecond HFT but ideal for portfolio repricing, risk calculations, and batch analytics.</li>
+<li>Process-level isolation (fork per task) guarantees memory safety at the cost of overhead. C++ workers use this by default; other languages use single-process workers with per-request execution.</li>
+<li>The server is stateless — no workflow state machine. Multi-step processes are orchestrated by the client or an AI agent.</li>
 </ul>
 
 <p><a href="https://github.com/bill18/distributex_wspp">Link to GitHub Repository</a></p>

@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="480" viewBox="0 0 960 480" font-family="Menlo,Consolas,monospace">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+    <marker id="arrow-dash" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#805ad5"/>
+    </marker>
+  </defs>
+
+  <text x="480" y="25" font-size="16" font-weight="700" text-anchor="middle" fill="#222">Task Lifecycle — RequestEnvelope / ResponseEnvelope Flow</text>
+
+  <!-- Lifelines -->
+  <rect x="50" y="45" width="120" height="28" rx="4" fill="#3182ce"/>
+  <text x="110" y="64" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">Client</text>
+  <line x1="110" y1="73" x2="110" y2="440" stroke="#3182ce" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <rect x="230" y="45" width="120" height="28" rx="4" fill="#e53e3e"/>
+  <text x="290" y="64" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">Transport</text>
+  <line x1="290" y1="73" x2="290" y2="440" stroke="#e53e3e" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <rect x="410" y="45" width="120" height="28" rx="4" fill="#d69e2e"/>
+  <text x="470" y="64" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">Gateway</text>
+  <line x1="470" y1="73" x2="470" y2="440" stroke="#d69e2e" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <rect x="590" y="45" width="120" height="28" rx="4" fill="#805ad5"/>
+  <text x="650" y="64" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">Broker</text>
+  <line x1="650" y1="73" x2="650" y2="440" stroke="#805ad5" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <rect x="790" y="45" width="120" height="28" rx="4" fill="#38a169"/>
+  <text x="850" y="64" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">Worker</text>
+  <line x1="850" y1="73" x2="850" y2="440" stroke="#38a169" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- 1. Submit task -->
+  <line x1="150" y1="100" x2="228" y2="100" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="190" y="93" font-size="11" text-anchor="middle" fill="#333">Submit (JSON)</text>
+  <rect x="155" y="104" width="70" height="16" rx="3" fill="#edf2f7"/>
+  <text x="190" y="116" font-size="9" text-anchor="middle" fill="#718096">1</text>
+
+  <!-- 2. Forward RequestEnvelope -->
+  <line x1="290" y1="130" x2="408" y2="130" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="350" y="123" font-size="11" text-anchor="middle" fill="#333">RequestEnvelope</text>
+  <rect x="355" y="134" width="70" height="16" rx="3" fill="#edf2f7"/>
+  <text x="390" y="146" font-size="9" text-anchor="middle" fill="#718096">2</text>
+
+  <!-- 3. Auth + Enqueue -->
+  <rect x="420" y="145" width="100" height="40" rx="4" fill="#fefcbf" stroke="#d69e2e" stroke-width="1"/>
+  <text x="470" y="160" font-size="10" text-anchor="middle" fill="#744210">Auth + wrap</text>
+  <text x="470" y="175" font-size="10" text-anchor="middle" fill="#744210">→ RequestEnvelope</text>
+
+  <line x1="470" y1="195" x2="588" y2="195" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="530" y="188" font-size="11" text-anchor="middle" fill="#333">Enqueue</text>
+  <rect x="555" y="199" width="70" height="16" rx="3" fill="#edf2f7"/>
+  <text x="590" y="211" font-size="9" text-anchor="middle" fill="#718096">3</text>
+
+  <!-- 4. Broker stores -->
+  <rect x="600" y="210" width="100" height="20" rx="4" fill="#e9d8fd" stroke="#805ad5" stroke-width="1"/>
+  <text x="650" y="224" font-size="10" text-anchor="middle" fill="#553c9a">global_requests</text>
+
+  <!-- 5. Ack request_id -->
+  <line x1="290" y1="240" x2="152" y2="240" stroke="#999" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="220" y="233" font-size="11" text-anchor="middle" fill="#666">task_id</text>
+  <rect x="145" y="244" width="70" height="16" rx="3" fill="#edf2f7"/>
+  <text x="180" y="256" font-size="9" text-anchor="middle" fill="#718096">4</text>
+
+  <!-- 6. Consume -->
+  <line x1="650" y1="270" x2="788" y2="270" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="720" y="263" font-size="11" text-anchor="middle" fill="#333">Dispatch task</text>
+  <rect x="725" y="274" width="70" height="16" rx="3" fill="#edf2f7"/>
+  <text x="760" y="286" font-size="9" text-anchor="middle" fill="#718096">5</text>
+
+  <!-- 7. Execute plugin -->
+  <rect x="780" y="285" width="60" height="55" rx="4" fill="#e6fffa" stroke="#38a169" stroke-width="1"/>
+  <text x="810" y="300" font-size="10" text-anchor="middle" fill="#276749">Execute</text>
+  <text x="810" y="315" font-size="10" text-anchor="middle" fill="#276749">plugin</text>
+  <text x="810" y="330" font-size="10" text-anchor="middle" fill="#276749">function</text>
+
+  <!-- 8. Publish Response -->
+  <line x1="850" y1="350" x2="652" y2="350" stroke="#805ad5" stroke-width="2" marker-end="url(#arrow-dash)"/>
+  <text x="755" y="343" font-size="11" text-anchor="middle" fill="#553c9a">ResponseEnvelope</text>
+  <rect x="778" y="354" width="70" height="16" rx="3" fill="#edf2f7"/>
+  <text x="813" y="366" font-size="9" text-anchor="middle" fill="#718096">6</text>
+
+  <!-- 9. Ack task -->
+  <rect x="600" y="358" width="100" height="20" rx="4" fill="#e9d8fd" stroke="#805ad5" stroke-width="1"/>
+  <text x="650" y="372" font-size="10" text-anchor="middle" fill="#553c9a">resp_topic</text>
+
+  <!-- 10. ResultRouter delivers -->
+  <line x1="650" y1="390" x2="412" y2="390" stroke="#805ad5" stroke-width="2" marker-end="url(#arrow-dash)"/>
+  <text x="535" y="383" font-size="11" text-anchor="middle" fill="#553c9a">Route to client</text>
+  <rect x="523" y="394" width="70" height="16" rx="3" fill="#edf2f7"/>
+  <text x="558" y="406" font-size="9" text-anchor="middle" fill="#718096">7</text>
+
+  <!-- 11. Deliver to client -->
+  <line x1="470" y1="420" x2="152" y2="420" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="315" y="413" font-size="11" text-anchor="middle" fill="#333">Result</text>
+  <rect x="295" y="424" width="70" height="16" rx="3" fill="#edf2f7"/>
+  <text x="330" y="436" font-size="9" text-anchor="middle" fill="#718096">8</text>
+</svg>
