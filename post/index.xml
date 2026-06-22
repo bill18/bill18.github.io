@@ -7,6 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 01 Jun 2026 12:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2026 12:00:00 -0400</lastBuildDate>
     
 	<atom:link href="https://bill18.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -45,6 +46,15 @@
       
       <guid>https://bill18.github.io/post/project-1/</guid>
       <description>Extends QuantLib Python with symbol-based lookups, centralized calendar and schedule management, a flexible curve builder, and class-level decorators that accept strings and integers where objects were previously required.</description>
+    </item>
+    
+    <item>
+      <title>Serverless Finance: Moving Computation to the Browser</title>
+      <link>https://bill18.github.io/post/serverless-finance/</link>
+      <pubDate>Mon, 22 Jun 2026 12:00:00 -0400</pubDate>
+      
+      <guid>https://bill18.github.io/post/serverless-finance/</guid>
+      <description>Exploring WebAssembly, gRPC, and hybrid patterns for computational finance; interactive WASM pricing and gRPC for heavy compute.</description>
     </item>
     
     <item>

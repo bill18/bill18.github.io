@@ -7,6 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 01 Jun 2026 12:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2026 12:00:00 -0400</lastBuildDate>
     
 	<atom:link href="https://bill18.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -36,6 +37,15 @@
       
       <guid>https://bill18.github.io/post/distributex/</guid>
       <description>DistributeX wraps legacy, thread-unsafe quantitative libraries and exposes them as distributed, polyglot tasks. Architecture, design trade-offs, and runnable demos in C++, Python, Java, and C#.</description>
+    </item>
+    
+    <item>
+      <title>Serverless Finance: Moving Computation to the Browser</title>
+      <link>https://bill18.github.io/post/serverless-finance/</link>
+      <pubDate>Mon, 22 Jun 2026 12:00:00 -0400</pubDate>
+      
+      <guid>https://bill18.github.io/post/serverless-finance/</guid>
+      <description>Exploring WebAssembly, gRPC, and hybrid patterns for computational finance; interactive WASM pricing and gRPC for heavy compute.</description>
     </item>
     
     <item>
