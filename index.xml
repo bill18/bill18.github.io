@@ -30,12 +30,12 @@
     </item>
     
     <item>
-      <title>DistributeX WSPP: Scaling Legacy Quant Engines</title>
+      <title>DistributeX: Scaling Legacy Quant Engines</title>
       <link>https://bill18.github.io/post/distributex/</link>
       <pubDate>Tue, 01 Sep 2020 12:00:00 -0400</pubDate>
       
       <guid>https://bill18.github.io/post/distributex/</guid>
-      <description>DistributeX WSPP wraps legacy, thread-unsafe quantitative libraries and exposes them as distributed, polyglot tasks. Architecture, design trade-offs, and runnable demos in C++, Python, Java, and C#.</description>
+      <description>DistributeX wraps legacy, thread-unsafe quantitative libraries and exposes them as distributed, polyglot tasks. Architecture, design trade-offs, and runnable demos in C++, Python, Java, and C#.</description>
     </item>
     
     <item>

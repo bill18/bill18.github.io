@@ -6,7 +6,7 @@ Personal GitHub Pages site for Wenhua Wang (Quant Finance Developer), built with
 
 - **Built output is committed** — only `_site/` is gitignored. The repo contains generated HTML/CSS/JS directly on `master` (standard GitHub Pages workflow).
 - **No Hugo source files** in this repo — no `content/`, `layouts/`, `config.toml`, or theme files are tracked.
-- `distributex/` — standalone article ("Scaling Legacy Quant Engines: Design & Code with DistributeX WSPP") with multi-language demos (Python, C++, Java, C#). Its own `README.md` and `post.md` serve as entrypoints. Published at `/post/distributex/`.
+- `distributex/` — standalone article ("Scaling Legacy Quant Engines: Design & Code with DistributeX") with multi-language demos (Python, C++, Java, C#). Its own `README.md` and `post.md` serve as entrypoints. Published at `/post/distributex/`.
 
 ## Key pages
 
@@ -18,7 +18,7 @@ Personal GitHub Pages site for Wenhua Wang (Quant Finance Developer), built with
 | `/contact/` | Contact form |
 | `/post/ql-risk-lab/` | QuantLib AI Risk Lab |
 | `/post/tax-pipeline/` | OCR-LLM Tax Pipeline |
-| `/post/distributex/` | DistributeX WSPP article |
+| `/post/distributex/` | DistributeX article |
 
 ## distributex/ demos
 
