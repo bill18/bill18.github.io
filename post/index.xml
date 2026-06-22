@@ -6,28 +6,54 @@
     <description>Recent content in Projects on Wenhua Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Mar 2017 12:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jun 2026 12:00:00 -0400</lastBuildDate>
     
 	<atom:link href="https://bill18.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Project 1: QuantLib Python Library Extension</title>
+      <title>QuantLib AI Risk Lab</title>
+      <link>https://bill18.github.io/post/ql-risk-lab/</link>
+      <pubDate>Mon, 01 Jun 2026 12:00:00 -0400</pubDate>
+      
+      <guid>https://bill18.github.io/post/ql-risk-lab/</guid>
+      <description>An agentic risk analytics platform combining QuantLib, Pydantic, and LLM orchestration for natural-language-driven risk computations.</description>
+    </item>
+    
+    <item>
+      <title>OCR-LLM Tax Pipeline</title>
+      <link>https://bill18.github.io/post/tax-pipeline/</link>
+      <pubDate>Mon, 01 Dec 2025 12:00:00 -0500</pubDate>
+      
+      <guid>https://bill18.github.io/post/tax-pipeline/</guid>
+      <description>End-to-end bookkeeping-to-tax-preparation automation: PDF ingestion, OCR extraction, LLM structuring, category mapping, and multi-format tax export.</description>
+    </item>
+    
+    <item>
+      <title>DistributeX WSPP: Scaling Legacy Quant Engines</title>
+      <link>https://bill18.github.io/post/distributex/</link>
+      <pubDate>Tue, 01 Sep 2020 12:00:00 -0400</pubDate>
+      
+      <guid>https://bill18.github.io/post/distributex/</guid>
+      <description>DistributeX WSPP wraps legacy, thread-unsafe quantitative libraries and exposes them as distributed, polyglot tasks. Architecture, design trade-offs, and runnable demos in C++, Python, Java, and C#.</description>
+    </item>
+    
+    <item>
+      <title>QuantLib Python Library Extension</title>
       <link>https://bill18.github.io/post/project-1/</link>
       <pubDate>Sat, 09 May 2020 10:58:08 -0400</pubDate>
       
       <guid>https://bill18.github.io/post/project-1/</guid>
-      <description>QuantLib Extension Introduction QuantLib is a well known free and open source quantitative library for finance. It has interfaces in Python, Java, R, etc. which was generated with SWIG. It is gradually accepted by financial engineering and researcher over the world. But because of the lacking of documentation, the adoption process is slow. There are two books &amp;ldquo;Implementing Quantlib &amp;ndash; An Inside Look at Quantitative Finance in C++&amp;rdquo; written by Luigi Ballabio and &amp;ldquo;Quantlib Python Cookbook &amp;ndash; Hands-on Quantitative Finance in Python&amp;rdquo; by Goutham Balaraman and Luigi Ballabio.</description>
+      <description>Extends QuantLib Python with symbol-based lookups, centralized calendar and schedule management, a flexible curve builder, and class-level decorators that accept strings and integers where objects were previously required.</description>
     </item>
     
     <item>
-      <title>Project 2: Java Option Pricing Library</title>
+      <title>Java Option Pricing Library</title>
       <link>https://bill18.github.io/post/project-2/</link>
       <pubDate>Mon, 10 Apr 2017 11:00:59 -0400</pubDate>
       
       <guid>https://bill18.github.io/post/project-2/</guid>
-      <description>Option Functions and a calculaor UI in Java All the function models described in the book The complete guide to option pricing formulas by Espen Gaarder Haug were implemented in this project.
-It was done a while ago, I lost my original source code but found the jar file. The source code was mainly recovered from the jar.
+      <description>Full implementation of option pricing models from Espen Haug&amp;rsquo;s reference — Black-Scholes, binomial trees, Greeks, implied volatility, and exotics — with a Swing calculator UI. Modernized with Java 8 lambdas and streams.</description>
 Part of the code has been rewritten with new features in Java 8, e.</description>
     </item>
     
