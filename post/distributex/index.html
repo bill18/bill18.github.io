@@ -59,7 +59,7 @@
 
   
   
-  <header class="cover bg-top" style="background-image: url('https://bill18.github.io/images/jeremy-thomas-rMmibFe4czY-unsplash.jpg');">
+  <header class="cover bg-top" style="background-image: url('https://bill18.github.io/images/distributex/sequence.webp');">
     <div class="pb3-m pb6-l bg-black-60">
       <nav class="pv3 ph3 ph4-ns" role="navigation">
   <div class="flex-l justify-between items-center center">
@@ -200,7 +200,7 @@
 
 <h2 id="architecture">Architecture</h2>
 
-<p><img src="../../distributex/images/architecture.svg" alt="Architecture" title="DistributeX Architecture"></p>
+<p><img src="/ima/distributex/architecture.svg" alt="Architecture" title="DistributeX Architecture"></p>
 
 <p>The system is designed as a <strong>Message Broker Driven</strong> architecture where transport protocols are decoupled from core computation via a unified envelope system:</p>
 
@@ -211,7 +211,7 @@
 <li><strong>Workers</strong> — Consume tasks from the broker, load language-specific plugins (<code>.so</code>, <code>.jar</code>, <code>.py</code>, <code>.dll</code>), and publish <code>ResponseEnvelope</code>s to response topics. C++ workers fork a child process per task for memory isolation; other languages use process-per-worker.</li>
 </ul>
 
-<p><img src="../../distributex/images/sequence.svg" alt="Sequence" title="Task Lifecycle"></p>
+<p><img src="/images/distributex/detailed_arch.png" alt="Sequence" title="Task Lifecycle"></p>
 
 <p>The task lifecycle follows a consistent flow: a client submits a request through any transport adapter; the gateway authorizes and wraps it into a <code>RequestEnvelope</code> (containing <code>request_id</code>, <code>user_id</code>, <code>resp_topic</code>, and payload); the broker enqueues it; a worker consumes, executes, and publishes a <code>ResponseEnvelope</code> to the response topic; the <code>ResultRouter</code> dispatches the result back to the correct transport connection.</p>
 
