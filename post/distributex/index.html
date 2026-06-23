@@ -3,251 +3,325 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
+
     <title>DistributeX: Scaling Legacy Quant Engines | Wenhua Wang</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="generator" content="Hugo 0.74.3" />
-    
-    
-      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-    
 
-    
-    
-      <link href="https://bill18.github.io/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
-    
+    <meta NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-    
+    <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css"
+      rel="stylesheet">
 
-    
-      
-    
+    <link href="/index.xml" rel="alternate" type="application/rss+xml"
+      title="Wenhua Wang" />
+    <link href="/index.xml" rel="feed" type="application/rss+xml"
+      title="Wenhua Wang" />
 
-    
-    
-      <link href="https://bill18.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Wenhua Wang" />
-      <link href="https://bill18.github.io/index.xml" rel="feed" type="application/rss+xml" title="Wenhua Wang" />
-      
-    
-    
-    <meta property="og:title" content="DistributeX: Scaling Legacy Quant Engines" />
-<meta property="og:description" content="Process-level isolation for thread-unsafe quantitative libraries with polyglot task orchestration." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://bill18.github.io/post/distributex/" />
-<meta property="article:published_time" content="2020-09-01T12:00:00-04:00" />
-<meta property="article:modified_time" content="2020-09-01T12:00:00-04:00" />
-<meta itemprop="name" content="DistributeX: Scaling Legacy Quant Engines">
-<meta itemprop="description" content="Process-level isolation for thread-unsafe quantitative libraries with polyglot task orchestration.">
-<meta itemprop="datePublished" content="2020-09-01T12:00:00-04:00" />
-<meta itemprop="dateModified" content="2020-09-01T12:00:00-04:00" />
-<meta itemprop="wordCount" content="1200">
+    <meta property="og:title"
+      content="DistributeX: Scaling Legacy Quant Engines" />
+    <meta property="og:description"
+      content="Process-level isolation for thread-unsafe quantitative libraries with polyglot task orchestration." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="/post/distributex/" />
+    <meta property="article:published_time"
+      content="2020-09-01T12:00:00-04:00" />
+    <meta property="article:modified_time"
+      content="2020-09-01T12:00:00-04:00" />
+    <meta itemprop="name" content="DistributeX: Scaling Legacy Quant Engines">
+    <meta itemprop="description"
+      content="Process-level isolation for thread-unsafe quantitative libraries with polyglot task orchestration.">
+    <meta itemprop="datePublished" content="2020-09-01T12:00:00-04:00" />
+    <meta itemprop="dateModified" content="2020-09-01T12:00:00-04:00" />
+    <meta itemprop="wordCount" content="1200">
 
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="DistributeX: Scaling Legacy Quant Engines"/>
-<meta name="twitter:description" content="Process-level isolation for thread-unsafe quantitative libraries with polyglot task orchestration."/>
+    <meta itemprop="keywords" content />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title"
+      content="DistributeX: Scaling Legacy Quant Engines" />
+    <meta name="twitter:description"
+      content="Process-level isolation for thread-unsafe quantitative libraries with polyglot task orchestration." />
 
   </head>
 
   <body class="ma0 avenir bg-near-white">
 
-    
-   
-  
-
-  
-  
-  <header class="cover bg-top" style="background-image: url('https://bill18.github.io/images/distributex/sequence.webp');">
-    <div class="pb3-m pb6-l bg-black-60">
-      <nav class="pv3 ph3 ph4-ns" role="navigation">
-  <div class="flex-l justify-between items-center center">
-    <a href="https://bill18.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
-      Wenhua Wang
-    </a>
-    <div class="flex-l items-center">
-      
-
-      
-        <ul class="pl0 mr3">
-          
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="https://bill18.github.io/about/" title="About page">
-              About
+    <header class="cover bg-top"
+      style="background-image: url('images/sequence.webp');">
+      <div class="pb3-m pb6-l bg-black-60">
+        <nav class="pv3 ph3 ph4-ns" role="navigation">
+          <div class="flex-l justify-between items-center center">
+            <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+              Wenhua Wang
             </a>
-          </li>
-          
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="https://bill18.github.io/contact/" title="Contact page">
-              Contact
-            </a>
-          </li>
-          
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="https://bill18.github.io/post/" title="Projects page">
-              Projects
-            </a>
-          </li>
-          
-        </ul>
-      
+            <div class="flex-l items-center">
 
-      
+              <ul class="pl0 mr3">
 
+                <li class="list f5 f4-ns fw4 dib pr3">
+                  <a class="hover-white no-underline white-90" href="/about/"
+                    title="About page">
+                    About
+                  </a>
+                </li>
 
+                <li class="list f5 f4-ns fw4 dib pr3">
+                  <a class="hover-white no-underline white-90" href="/contact/"
+                    title="Contact page">
+                    Contact
+                  </a>
+                </li>
 
+                <li class="list f5 f4-ns fw4 dib pr3">
+                  <a class="hover-white no-underline white-90" href="/post/"
+                    title="Projects page">
+                    Projects
+                  </a>
+                </li>
 
+              </ul>
 
-<a href="https://www.linkedin.com/in/WenhuaWang/" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
-  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
-</svg>
+              <a href="https://www.linkedin.com/in/WenhuaWang/" target="_blank"
+                class="link-transition linkedin link dib z-999 pt3 pt0-l mr1"
+                title="LinkedIn link" rel="noopener"
+                aria-label="follow on LinkedIn——Opens in a new window">
+                <svg height="32px" style="enable-background:new 0 0 65 65;"
+                  version="1.1" viewBox="0 0 65 65" width="32px"
+                  xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <path
+                    d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z"
+                    style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+                </svg>
 
-<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
-<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
-</svg>
-</span></a>
+                <span class="new-window"><svg height="8px"
+                    style="enable-background:new 0 0 1000 1000;" version="1.1"
+                    viewBox="0 0 1000 1000" width="8px" xml:space="preserve"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path
+                      d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z"
+                      style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+                  </svg>
+                </span></a>
 
+              <a href="https://github.com/bill18" target="_blank"
+                class="link-transition github link dib z-999 pt3 pt0-l mr1"
+                title="Github link" rel="noopener"
+                aria-label="follow on Github——Opens in a new window">
+                <svg height="32px" style="enable-background:new 0 0 512 512;"
+                  version="1.1" viewBox="0 0 512 512" width="32px"
+                  xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <path
+                    d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z" />
+                </svg>
 
-<a href="https://github.com/bill18" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
-  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
-  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
-</svg>
+                <span class="new-window"><svg height="8px"
+                    style="enable-background:new 0 0 1000 1000;" version="1.1"
+                    viewBox="0 0 1000 1000" width="8px" xml:space="preserve"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path
+                      d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z"
+                      style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+                  </svg>
+                </span></a>
 
-<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
-<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
-</svg>
-</span></a>
+            </div>
+          </div>
+        </nav>
 
+        <div class="tc-l pv6 ph3 ph4-ns">
 
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">DistributeX: Scaling
+            Legacy Quant Engines</h1>
 
+          <h2
+            class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+            Process-level isolation for thread-unsafe quantitative libraries
+            with polyglot task orchestration.
+          </h2>
 
-
-
-
-    </div>
-  </div>
-</nav>
-
-      <div class="tc-l pv6 ph3 ph4-ns">
-        
-          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">DistributeX: Scaling Legacy Quant Engines</h1>
-          
-            <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
-              Process-level isolation for thread-unsafe quantitative libraries with polyglot task orchestration.
-            </h2>
-          
-        
+        </div>
       </div>
-    </div>
-  </header>
-
-
+    </header>
 
     <main class="pb7" role="main">
-      
-  
-  <article class="flex-l flex-wrap justify-between mw8 center ph3">
-    <header class="mt4 w-100">
-      <aside class="instapaper_ignoref b helvetica tracked">
-          
-        PROJECTS
-      </aside>
-      
 
+      <article class="flex-l flex-wrap justify-between mw8 center ph3">
+        <header class="mt4 w-100">
+          <aside class="instapaper_ignoref b helvetica tracked">
 
+            PROJECTS
+          </aside>
 
+          <div id="sharing" class="mt3">
 
-  <div id="sharing" class="mt3">
+            <a href="https://www.facebook.com/sharer.php?u=/post/distributex/"
+              class="facebook no-underline" aria-label="share on Facebook">
+              <svg height="32px" style="enable-background:new 0 0 67 67;"
+                version="1.1" viewBox="0 0 67 67" width="32px"
+                xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"><path
+                  d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z"
+                  style="fill-rule:evenodd;clip-rule:evenodd;" /></svg>
 
-    
-    <a href="https://www.facebook.com/sharer.php?u=https://bill18.github.io/post/distributex/" class="facebook no-underline" aria-label="share on Facebook">
-      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+            </a>
 
-    </a>
+            <a
+              href="https://twitter.com/share?url=/post/distributex/&amp;text=DistributeX:%20Scaling%20Legacy%20Quant%20Engines"
+              class="twitter no-underline" aria-label="share on Twitter">
+              <svg height="32px" style="enable-background:new 0 0 67 67;"
+                version="1.1" viewBox="0 0 67 67" width="32px"
+                xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"><path
+                  d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z"
+                  style="fill-rule:evenodd;clip-rule:evenodd;fill:;" /></svg>
 
-    
-    
-    <a href="https://twitter.com/share?url=https://bill18.github.io/post/distributex/&amp;text=DistributeX:%20Scaling%20Legacy%20Quant%20Engines" class="twitter no-underline" aria-label="share on Twitter">
-      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+            </a>
 
-    </a>
+            <a
+              href="https://www.linkedin.com/shareArticle?mini=true&amp;url=/post/distributex/&amp;title=DistributeX:%20Scaling%20Legacy%20Quant%20Engines"
+              class="linkedin no-underline" aria-label="share on LinkedIn">
+              <svg height="32px" style="enable-background:new 0 0 65 65;"
+                version="1.1" viewBox="0 0 65 65" width="32px"
+                xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path
+                  d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z"
+                  style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+              </svg>
 
-    
-    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://bill18.github.io/post/distributex/&amp;title=DistributeX:%20Scaling%20Legacy%20Quant%20Engines" class="linkedin no-underline" aria-label="share on LinkedIn">
-      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
-</svg>
+            </a>
+          </div>
 
-    </a>
-  </div>
+          <h1 class="f1 athelas mt3 mb1">DistributeX: Scaling Legacy Quant
+            Engines</h1>
 
+          <time class="f6 mv4 dib tracked"
+            datetime="2020-09-01T12:00:00-04:00">September 1, 2020</time>
 
-      <h1 class="f1 athelas mt3 mb1">DistributeX: Scaling Legacy Quant Engines</h1>
-      
-      
-      <time class="f6 mv4 dib tracked" datetime="2020-09-01T12:00:00-04:00">September 1, 2020</time>
+        </header>
+        <div
+          class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
 
-      
-      
-    </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+          <p>Quantitative finance libraries like QuantLib were designed for
+            single-threaded desktop use. Running them in modern cloud
+            environments — where concurrent pricing requests arrive from many
+            clients — exposes their thread-safety assumptions. The typical
+            response is a full rewrite, which is expensive, risky, and diverts
+            resources from revenue-generating work.</p>
 
-<p>Quantitative finance libraries like QuantLib were designed for single-threaded desktop use. Running them in modern cloud environments — where concurrent pricing requests arrive from many clients — exposes their thread-safety assumptions. The typical response is a full rewrite, which is expensive, risky, and diverts resources from revenue-generating work.</p>
+          <p>DistributeX takes a different approach. Rather than rewriting the
+            libraries, it wraps them in process-level isolation with a
+            lightweight orchestration layer. Unmodified legacy code runs safely
+            in sandboxed child processes, scaled horizontally by adding more
+            workers. The system supports polyglot workers across C++, Java,
+            Python, C#, and VBA, all coordinated through a unified message
+            broker.</p>
 
-<p>DistributeX takes a different approach. Rather than rewriting the libraries, it wraps them in process-level isolation with a lightweight orchestration layer. Unmodified legacy code runs safely in sandboxed child processes, scaled horizontally by adding more workers. The system supports polyglot workers across C++, Java, Python, C#, and VBA, all coordinated through a unified message broker.</p>
+          <h2 id="architecture">Architecture</h2>
 
-<h2 id="architecture">Architecture</h2>
+          <p><img src="/ima/distributex/architecture.svg" alt="Architecture"
+              title="DistributeX Architecture"></p>
 
-<p><img src="/ima/distributex/architecture.svg" alt="Architecture" title="DistributeX Architecture"></p>
+          <p>The system is designed as a <strong>Message Broker Driven</strong>
+            architecture where transport protocols are decoupled from core
+            computation via a unified envelope system:</p>
 
-<p>The system is designed as a <strong>Message Broker Driven</strong> architecture where transport protocols are decoupled from core computation via a unified envelope system:</p>
+          <ul>
+            <li><strong>Transport Adapters</strong> — HTTP, WebSocket, SSE, and
+              MQ. Each adapter translates client requests into a standard
+              <code>RequestEnvelope</code> and delivers responses via
+              topic-based routing. The WebSocket++ server delegates to
+              protocol-specific modules: <code>HttpPushPullModule</code> for
+              REST, <code>SseModule</code> for streaming, and
+              <code>MqClientGateway</code> for direct broker access.</li>
+            <li><strong>Common Gateway Layer</strong> — <code>AuthService</code>
+              handles JWT-based authentication and authorization, while
+              <code>RequestSubmissionService</code> generates unique
+              <code>request_id</code>, wraps payloads into
+              <code>RequestEnvelope</code>s, and enqueues them into the
+              broker.</li>
+            <li><strong>Unified Broker Layer</strong> — The <code>IBroker</code>
+              interface supports both pub/sub and durable queuing.
+              <code>InMemoryBroker</code> (default) features visibility timeouts
+              and retry logic. Swap in <code>NATSBroker</code> or
+              <code>RedisBroker</code> for distributed deployments without
+              changing application code.</li>
+            <li><strong>Workers</strong> — Consume tasks from the broker, load
+              language-specific plugins (<code>.so</code>, <code>.jar</code>,
+              <code>.py</code>, <code>.dll</code>), and publish
+              <code>ResponseEnvelope</code>s to response topics. C++ workers
+              fork a child process per task for memory isolation; other
+              languages use process-per-worker.</li>
+          </ul>
 
-<ul>
-<li><strong>Transport Adapters</strong> — HTTP, WebSocket, SSE, and MQ. Each adapter translates client requests into a standard <code>RequestEnvelope</code> and delivers responses via topic-based routing. The WebSocket++ server delegates to protocol-specific modules: <code>HttpPushPullModule</code> for REST, <code>SseModule</code> for streaming, and <code>MqClientGateway</code> for direct broker access.</li>
-<li><strong>Common Gateway Layer</strong> — <code>AuthService</code> handles JWT-based authentication and authorization, while <code>RequestSubmissionService</code> generates unique <code>request_id</code>, wraps payloads into <code>RequestEnvelope</code>s, and enqueues them into the broker.</li>
-<li><strong>Unified Broker Layer</strong> — The <code>IBroker</code> interface supports both pub/sub and durable queuing. <code>InMemoryBroker</code> (default) features visibility timeouts and retry logic. Swap in <code>NATSBroker</code> or <code>RedisBroker</code> for distributed deployments without changing application code.</li>
-<li><strong>Workers</strong> — Consume tasks from the broker, load language-specific plugins (<code>.so</code>, <code>.jar</code>, <code>.py</code>, <code>.dll</code>), and publish <code>ResponseEnvelope</code>s to response topics. C++ workers fork a child process per task for memory isolation; other languages use process-per-worker.</li>
-</ul>
+          <p><img src="images/distributex/detailed_arch.png" alt="Sequence"
+              title="Task Lifecycle"></p>
 
-<p><img src="/images/distributex/detailed_arch.png" alt="Sequence" title="Task Lifecycle"></p>
+          <p>The task lifecycle follows a consistent flow: a client submits a
+            request through any transport adapter; the gateway authorizes and
+            wraps it into a <code>RequestEnvelope</code> (containing
+            <code>request_id</code>, <code>user_id</code>,
+            <code>resp_topic</code>, and payload); the broker enqueues it; a
+            worker consumes, executes, and publishes a
+            <code>ResponseEnvelope</code> to the response topic; the
+            <code>ResultRouter</code> dispatches the result back to the correct
+            transport connection.</p>
 
-<p>The task lifecycle follows a consistent flow: a client submits a request through any transport adapter; the gateway authorizes and wraps it into a <code>RequestEnvelope</code> (containing <code>request_id</code>, <code>user_id</code>, <code>resp_topic</code>, and payload); the broker enqueues it; a worker consumes, executes, and publishes a <code>ResponseEnvelope</code> to the response topic; the <code>ResultRouter</code> dispatches the result back to the correct transport connection.</p>
+          <h2 id="plugin-contracts">Plugin Contracts</h2>
 
-<h2 id="plugin-contracts">Plugin Contracts</h2>
+          <p>Each worker plugin exposes a method map of JSON-in/JSON-out
+            functions using language-native conventions:</p>
 
-<p>Each worker plugin exposes a method map of JSON-in/JSON-out functions using language-native conventions:</p>
+          <table>
+            <thead>
+              <tr><th>Language</th><th>Plugin Contract</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>C++</td><td><code>extern &quot;C&quot;
+                    std::map&lt;std::string, json(*)(const json&amp;)&gt;
+                    get_methods()</code></td></tr>
+              <tr><td>Python</td><td><code>def get_methods() -&gt; dict[str,
+                    Callable]</code></td></tr>
+              <tr><td>Java</td><td><code>public static Map&lt;String,
+                    Function&lt;JsonNode, JsonNode&gt;&gt;
+                    getMethods()</code></td></tr>
+              <tr><td>C#</td><td><code>public static Dictionary&lt;string,
+                    Func&lt;JsonNode, JsonNode&gt;&gt;
+                    GetMethods()</code></td></tr>
+              <tr><td>VBA</td><td><code>Public Function GetMethods() As
+                    Dictionary</code></td></tr>
+            </tbody>
+          </table>
 
-<table>
-<thead>
-<tr><th>Language</th><th>Plugin Contract</th></tr>
-</thead>
-<tbody>
-<tr><td>C++</td><td><code>extern &quot;C&quot; std::map&lt;std::string, json(*)(const json&amp;)&gt; get_methods()</code></td></tr>
-<tr><td>Python</td><td><code>def get_methods() -&gt; dict[str, Callable]</code></td></tr>
-<tr><td>Java</td><td><code>public static Map&lt;String, Function&lt;JsonNode, JsonNode&gt;&gt; getMethods()</code></td></tr>
-<tr><td>C#</td><td><code>public static Dictionary&lt;string, Func&lt;JsonNode, JsonNode&gt;&gt; GetMethods()</code></td></tr>
-<tr><td>VBA</td><td><code>Public Function GetMethods() As Dictionary</code></td></tr>
-</tbody>
-</table>
+          <p>Wrapping a legacy library requires ~30 lines of JSON marshalling.
+            No changes to the original library are needed.</p>
 
-<p>Wrapping a legacy library requires ~30 lines of JSON marshalling. No changes to the original library are needed.</p>
+          <h2 id="messaging-contracts">Message Contracts</h2>
 
-<h2 id="messaging-contracts">Message Contracts</h2>
+          <p>The system uses standardized JSON envelopes for multi-language
+            compatibility:</p>
 
-<p>The system uses standardized JSON envelopes for multi-language compatibility:</p>
+          <ul>
+            <li><strong>RequestEnvelope</strong>
+              (<code>request_envelope.h</code>) — contains
+              <code>request_id</code>, <code>user_id</code>,
+              <code>resp_topic</code>, and the task <code>payload</code>.</li>
+            <li><strong>ResponseEnvelope</strong>
+              (<code>response_envelope.h</code>) — contains
+              <code>request_id</code>, <code>status</code>, and the computation
+              <code>result</code>.</li>
+          </ul>
 
-<ul>
-<li><strong>RequestEnvelope</strong> (<code>request_envelope.h</code>) — contains <code>request_id</code>, <code>user_id</code>, <code>resp_topic</code>, and the task <code>payload</code>.</li>
-<li><strong>ResponseEnvelope</strong> (<code>response_envelope.h</code>) — contains <code>request_id</code>, <code>status</code>, and the computation <code>result</code>.</li>
-</ul>
+          <h2 id="server-internals">Server Internals</h2>
 
-<h2 id="server-internals">Server Internals</h2>
+          <p>The C++ server at <code>cpp/server/server_main.cpp</code>
+            initializes core services in a modular fashion:</p>
 
-<p>The C++ server at <code>cpp/server/server_main.cpp</code> initializes core services in a modular fashion:</p>
-
-<pre><code>auto msgBroker = make_broker(serverCfg.broker);
+          <pre><code>auto msgBroker = make_broker(serverCfg.broker);
 AuthService authService(&amp;registry);
 RequestSubmissionService submissionService(msgBroker.get());
 ResultCache resultCache;
@@ -258,33 +332,45 @@ resultRouter.start();
 auto server = setup_ws_server(..., &amp;httpModule, &amp;sseModule);
 </code></pre>
 
-<h2 id="broker-layer">Pluggable Broker Layer</h2>
+          <h2 id="broker-layer">Pluggable Broker Layer</h2>
 
-<p>The <code>IBroker</code> interface is the backbone of the system. Implementations include:</p>
+          <p>The <code>IBroker</code> interface is the backbone of the system.
+            Implementations include:</p>
 
-<ul>
-<li><strong>InMemoryBroker</strong> — default for single-node deployments. Features visibility timeouts, nack/requeue, and async dispatch to local subscribers.</li>
-<li><strong>NATSBroker</strong> — NATS-backed for multi-cloud, durable, high-throughput routing.</li>
-<li><strong>RedisBroker</strong> — Redis pub/sub for lightweight distributed setups.</li>
-</ul>
+          <ul>
+            <li><strong>InMemoryBroker</strong> — default for single-node
+              deployments. Features visibility timeouts, nack/requeue, and async
+              dispatch to local subscribers.</li>
+            <li><strong>NATSBroker</strong> — NATS-backed for multi-cloud,
+              durable, high-throughput routing.</li>
+            <li><strong>RedisBroker</strong> — Redis pub/sub for lightweight
+              distributed setups.</li>
+          </ul>
 
-<p>All are interchangeable via configuration — no code changes required.</p>
+          <p>All are interchangeable via configuration — no code changes
+            required.</p>
 
-<h2 id="security">Authentication &amp; Security</h2>
+          <h2 id="security">Authentication &amp; Security</h2>
 
-<p>Security follows a three-tier hierarchy:</p>
+          <p>Security follows a three-tier hierarchy:</p>
 
-<ol>
-<li><strong>Transport Security</strong> — TLS for HTTP/WS/NATS connections.</li>
-<li><strong>Identity Security</strong> — JWT-based authentication (<code>AuthService</code>) for every request, with RSA-256 signed tokens.</li>
-<li><strong>Topic Security</strong> — Response topics are resolved server-side; clients cannot spoof their response destination.</li>
-</ol>
+          <ol>
+            <li><strong>Transport Security</strong> — TLS for HTTP/WS/NATS
+              connections.</li>
+            <li><strong>Identity Security</strong> — JWT-based authentication
+              (<code>AuthService</code>) for every request, with RSA-256 signed
+              tokens.</li>
+            <li><strong>Topic Security</strong> — Response topics are resolved
+              server-side; clients cannot spoof their response destination.</li>
+          </ol>
 
-<h2 id="mcp-integration">AI Agent Integration (MCP)</h2>
+          <h2 id="mcp-integration">AI Agent Integration (MCP)</h2>
 
-<p>DistributeX exposes a <strong>Model Context Protocol (MCP) server</strong> that gives AI agents access to the framework through standard tool calls:</p>
+          <p>DistributeX exposes a <strong>Model Context Protocol (MCP)
+              server</strong> that gives AI agents access to the framework
+            through standard tool calls:</p>
 
-<pre><code>Claude Desktop / Web / Custom App
+          <pre><code>Claude Desktop / Web / Custom App
         ↓
      MCP Server (Python)
         ├─ submit_task     — fire a single computation
@@ -298,112 +384,153 @@ auto server = setup_ws_server(..., &amp;httpModule, &amp;sseModule);
     Worker Pool (100s of nodes)
 </code></pre>
 
-<p><strong>Getting started:</strong></p>
+          <p><strong>Getting started:</strong></p>
 
-<pre><code>pip install -r distributex/python/mcp/requirements_mcp.txt
+          <pre><code>pip install -r distributex/python/mcp/requirements_mcp.txt
 DISTRIBUTEX_URL=http://localhost:8080 \
   python3 distributex/python/mcp/distributex_mcp_server.py
 </code></pre>
 
-<p>Then configure Claude Desktop to point to the MCP server and ask it to price bonds, run sensitivity analyses, or automate portfolio monitoring.</p>
+          <p>Then configure Claude Desktop to point to the MCP server and ask it
+            to price bonds, run sensitivity analyses, or automate portfolio
+            monitoring.</p>
 
-<h2 id="use-cases">Use Cases</h2>
+          <h2 id="use-cases">Use Cases</h2>
 
-<ol>
-<li><strong>Bond pricing</strong> — wrap a legacy C++ QuantLib plugin without making it thread-safe. Risk systems that need concurrent pricing of many instruments simply add more worker processes.</li>
-<li><strong>Monte Carlo simulations</strong> — wrap a Python/NumPy compute kernel. Parameter sweeps that are embarrassingly parallel and CPU-bound.</li>
-<li><strong>Cross-language orchestration</strong> — a Java plugin handles data ingestion, a C++ plugin runs the compute, and a Python post-processor generates reports. All coordinated through the same broker.</li>
-<li><strong>AI-driven portfolio analysis</strong> — a Claude agent batch-submits pricing for 500 bonds across 5 yield curve scenarios, waits for results, computes Greeks, and returns trading recommendations — all autonomously.</li>
-</ol>
+          <ol>
+            <li><strong>Bond pricing</strong> — wrap a legacy C++ QuantLib
+              plugin without making it thread-safe. Risk systems that need
+              concurrent pricing of many instruments simply add more worker
+              processes.</li>
+            <li><strong>Monte Carlo simulations</strong> — wrap a Python/NumPy
+              compute kernel. Parameter sweeps that are embarrassingly parallel
+              and CPU-bound.</li>
+            <li><strong>Cross-language orchestration</strong> — a Java plugin
+              handles data ingestion, a C++ plugin runs the compute, and a
+              Python post-processor generates reports. All coordinated through
+              the same broker.</li>
+            <li><strong>AI-driven portfolio analysis</strong> — a Claude agent
+              batch-submits pricing for 500 bonds across 5 yield curve
+              scenarios, waits for results, computes Greeks, and returns trading
+              recommendations — all autonomously.</li>
+          </ol>
 
-<h2 id="multilang-demos">Multi-language Demos</h2>
+          <h2 id="multilang-demos">Multi-language Demos</h2>
 
-<p>Each language has a standalone demo exercising the same plugin contract:</p>
+          <p>Each language has a standalone demo exercising the same plugin
+            contract:</p>
 
-<ul>
-<li><strong>Python</strong>: <code>python3 distributex/demos/python/run_demo.py</code></li>
-<li><strong>C++</strong>: <code>cd distributex/demos/cxx &amp;&amp; mkdir build &amp;&amp; cd build &amp;&amp; cmake .. &amp;&amp; cmake --build .</code></li>
-<li><strong>Java</strong>: <code>cd distributex/demos/java &amp;&amp; mvn -q -DskipTests package &amp;&amp; java -cp target/article-java-demo-0.1.0.jar io.distributex.demo.PluginDemo</code></li>
-<li><strong>C#</strong>: <code>cd distributex/demos/csharp &amp;&amp; dotnet build -c Release &amp;&amp; dotnet run --project ArticleDemo.csproj -c Release</code></li>
-<li><strong>VBA</strong>: <code>cd distributex/demos/vba &amp;&amp; ...</code> (Excel macro)</li>
-</ul>
+          <ul>
+            <li><strong>Python</strong>: <code>python3
+                distributex/demos/python/run_demo.py</code></li>
+            <li><strong>C++</strong>: <code>cd distributex/demos/cxx &amp;&amp;
+                mkdir build &amp;&amp; cd build &amp;&amp; cmake .. &amp;&amp;
+                cmake --build .</code></li>
+            <li><strong>Java</strong>: <code>cd distributex/demos/java
+                &amp;&amp; mvn -q -DskipTests package &amp;&amp; java -cp
+                target/article-java-demo-0.1.0.jar
+                io.distributex.demo.PluginDemo</code></li>
+            <li><strong>C#</strong>: <code>cd distributex/demos/csharp
+                &amp;&amp; dotnet build -c Release &amp;&amp; dotnet run
+                --project ArticleDemo.csproj -c Release</code></li>
+            <li><strong>VBA</strong>: <code>cd distributex/demos/vba &amp;&amp;
+                ...</code> (Excel macro)</li>
+          </ul>
 
-<h2 id="tradeoffs">Trade-offs &amp; Operational Notes</h2>
+          <h2 id="tradeoffs">Trade-offs &amp; Operational Notes</h2>
 
-<ul>
-<li>The in-memory broker is fast and ephemeral — swap in NATS or Redis for durable, cross-process routing.</li>
-<li>Per-task latency: ~10-100ms (network + process spawn + compute). Not suitable for microsecond HFT but ideal for portfolio repricing, risk calculations, and batch analytics.</li>
-<li>Process-level isolation (fork per task) guarantees memory safety at the cost of overhead. C++ workers use this by default; other languages use single-process workers with per-request execution.</li>
-<li>The server is stateless — no workflow state machine. Multi-step processes are orchestrated by the client or an AI agent.</li>
-</ul>
+          <ul>
+            <li>The in-memory broker is fast and ephemeral — swap in NATS or
+              Redis for durable, cross-process routing.</li>
+            <li>Per-task latency: ~10-100ms (network + process spawn + compute).
+              Not suitable for microsecond HFT but ideal for portfolio
+              repricing, risk calculations, and batch analytics.</li>
+            <li>Process-level isolation (fork per task) guarantees memory safety
+              at the cost of overhead. C++ workers use this by default; other
+              languages use single-process workers with per-request
+              execution.</li>
+            <li>The server is stateless — no workflow state machine. Multi-step
+              processes are orchestrated by the client or an AI agent.</li>
+          </ul>
 
-<p><a href="https://github.com/bill18/distributex_wspp">Link to GitHub Repository</a></p>
+          <p><a href="https://github.com/bill18/distributex_wspp">Link to GitHub
+              Repository</a></p>
 
-<ul class="pa0">
-  
-</ul>
-<div class="mt6 instapaper_ignoref">
-      
-      
-      </div>
-    </div>
+          <ul class="pa0">
 
-    <aside class="w-30-l mt6-l">
+          </ul>
+          <div class="mt6 instapaper_ignoref">
 
+          </div>
+        </div>
 
+        <aside class="w-30-l mt6-l">
 
+        </aside>
 
-</aside>
-
-  </article>
+      </article>
 
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://bill18.github.io/" >
-    &copy;  Wenhua Wang 2020 
-  </a>
-    <div>
+      <div class="flex justify-between">
+        <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3"
+          href="/">
+          &copy; Wenhua Wang 2020
+        </a>
+        <div>
 
+          <a href="https://www.linkedin.com/in/WenhuaWang/" target="_blank"
+            class="link-transition linkedin link dib z-999 pt3 pt0-l mr1"
+            title="LinkedIn link" rel="noopener"
+            aria-label="follow on LinkedIn——Opens in a new window">
+            <svg height="32px" style="enable-background:new 0 0 65 65;"
+              version="1.1" viewBox="0 0 65 65" width="32px"
+              xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <path
+                d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z"
+                style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+            </svg>
 
+            <span class="new-window"><svg height="8px"
+                style="enable-background:new 0 0 1000 1000;" version="1.1"
+                viewBox="0 0 1000 1000" width="8px" xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path
+                  d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z"
+                  style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+              </svg>
+            </span></a>
 
+          <a href="https://github.com/bill18" target="_blank"
+            class="link-transition github link dib z-999 pt3 pt0-l mr1"
+            title="Github link" rel="noopener"
+            aria-label="follow on Github——Opens in a new window">
+            <svg height="32px" style="enable-background:new 0 0 512 512;"
+              version="1.1" viewBox="0 0 512 512" width="32px"
+              xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <path
+                d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z" />
+            </svg>
 
+            <span class="new-window"><svg height="8px"
+                style="enable-background:new 0 0 1000 1000;" version="1.1"
+                viewBox="0 0 1000 1000" width="8px" xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path
+                  d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z"
+                  style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+              </svg>
+            </span></a>
 
+        </div>
+      </div>
+    </footer>
 
-
-
-<a href="https://www.linkedin.com/in/WenhuaWang/" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
-  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
-</svg>
-
-<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
-<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
-</svg>
-</span></a>
-
-
-<a href="https://github.com/bill18" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
-  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
-  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
-</svg>
-
-<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
-<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
-</svg>
-</span></a>
-
-
-
-
-</div>
-  </div>
-</footer>
-
-    
-
-  <script src="https://bill18.github.io/dist/js/app.3fc0f988d21662902933.js"></script>
-
+    <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
 
   </body>
 </html>
