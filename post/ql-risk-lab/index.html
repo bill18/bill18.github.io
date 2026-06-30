@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>AI-Aided Risk FM | Wenhua Wang</title>
+    <title>QuantLib AI Risk Lab | Wenhua Wang</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="generator" content="Hugo 0.74.3" />
 
@@ -18,27 +18,27 @@
     <link href="/index.xml" rel="feed" type="application/rss+xml"
       title="Wenhua Wang" />
 
-    <meta property="og:title" content="AI-Aided Risk FM" />
+    <meta property="og:title" content="QuantLib AI Risk Lab" />
     <meta property="og:description"
-      content="An agentic risk analytics platform combining QuantLib, Pydantic, and LLM orchestration for natural-language-driven risk computations." />
+      content="Agentic risk analytics integrating QuantLib, LLM planning, MCP skill registry, and risk explanation for auditable regulatory risk workflows." />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="/post/ql-risk-lab/" />
     <meta property="article:published_time"
       content="2026-06-01T12:00:00-04:00" />
     <meta property="article:modified_time"
       content="2026-06-01T12:00:00-04:00" />
-    <meta itemprop="name" content="AI-Aided Risk FM">
+    <meta itemprop="name" content="QuantLib AI Risk Lab">
     <meta itemprop="description"
-      content="An agentic risk analytics platform combining QuantLib, Pydantic, and LLM orchestration for natural-language-driven risk computations.">
+      content="Agentic risk analytics integrating QuantLib, LLM planning, MCP skill registry, and risk explanation for auditable regulatory risk workflows.">
     <meta itemprop="datePublished" content="2026-06-01T12:00:00-04:00" />
     <meta itemprop="dateModified" content="2026-06-01T12:00:00-04:00" />
-    <meta itemprop="wordCount" content="1500">
+    <meta itemprop="wordCount" content="2200">
 
     <meta itemprop="keywords" content />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="AI-Aided Risk FM" />
+    <meta name="twitter:title" content="QuantLib AI Risk Lab" />
     <meta name="twitter:description"
-      content="An agentic risk analytics platform combining QuantLib, Pydantic, and LLM orchestration for natural-language-driven risk computations." />
+      content="Agentic risk analytics integrating QuantLib, LLM planning, MCP skill registry, and risk explanation for auditable regulatory risk workflows." />
 
   </head>
 
@@ -132,12 +132,12 @@
 
         <div class="tc-l pv6 ph3 ph4-ns">
 
-          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">AI-Aided Risk FM</h1>
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">QuantLib AI Risk Lab</h1>
 
           <h2
             class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
-            LLM-powered risk analytics — natural language objectives into
-            deterministic, auditable risk computations.
+            Agentic Financial Risk Analytics — QuantLib, LLM planning, MCP
+            skills, and risk explanation for auditable regulatory workflows.
           </h2>
 
         </div>
@@ -167,7 +167,7 @@
             </a>
 
             <a
-              href="https://twitter.com/share?url=/post/ql-risk-lab/&amp;text=AI-Aided%20Risk%20FM"
+              href="https://twitter.com/share?url=/post/ql-risk-lab/&amp;text=QuantLib%20AI%20Risk%20Lab"
               class="twitter no-underline" aria-label="share on Twitter">
               <svg height="32px" style="enable-background:new 0 0 67 67;"
                 version="1.1" viewBox="0 0 67 67" width="32px"
@@ -179,7 +179,7 @@
             </a>
 
             <a
-              href="https://www.linkedin.com/shareArticle?mini=true&amp;url=/post/ql-risk-lab/&amp;title=AI-Aided%20Risk%20FM"
+              href="https://www.linkedin.com/shareArticle?mini=true&amp;url=/post/ql-risk-lab/&amp;title=QuantLib%20AI%20Risk%20Lab"
               class="linkedin no-underline" aria-label="share on LinkedIn">
               <svg height="32px" style="enable-background:new 0 0 65 65;"
                 version="1.1" viewBox="0 0 65 65" width="32px"
@@ -193,7 +193,7 @@
             </a>
           </div>
 
-          <h1 class="f1 athelas mt3 mb1">AI-Aided Risk FM</h1>
+          <h1 class="f1 athelas mt3 mb1">QuantLib AI Risk Lab</h1>
 
           <time class="f6 mv4 dib tracked"
             datetime="2026-06-01T12:00:00-04:00">June 1, 2026</time>
@@ -212,21 +212,32 @@
           <p>What if the pipeline itself were a first-class citizen? Each step a
             typed, testable, composable unit, orchestrated by a planner that
             understands the domain?</p>
-          <p>That is the premise here. The system combines QuantLib for
-            numerical computation, Pydantic for validated data models, and an
-            LLM planner that translates natural language into a deterministic,
-            auditable execution plan.</p>
+          <p>That is the premise here. The system combines an
+            <strong>MCP-based architecture</strong> with typed skill
+            boundaries, a <strong>multi-asset QuantLib engine</strong> (IRS,
+            bonds, FX swaps, options), a <strong>scenario engine</strong>
+            supporting parallel and steepener yield curve shocks with curve
+            relinking for DV01, a <strong>risk interpretation layer</strong>
+            for attribution and commentary, and <strong>production-quality
+            tooling</strong> — Pydantic validation, Ruff linting, Mypy static
+            typing — all orchestrated by an LLM planner that translates
+            natural language into a deterministic, auditable execution
+            plan.</p>
 
           <h2 id="architecture">Architecture</h2>
 
           <p><img src="./images/architecture.png" alt="System Architecture"
-              title="AI-Aided Risk FM Architecture"></p>
+              title="QuantLib AI Risk Lab Architecture"></p>
 
           <p>The system is organized around a <strong>skill registry</strong>:
-            eight Python classes, each wrapping a discrete QuantLib capability.
-            They share state through two plain dictionaries —
-            <code>curve_registry</code> and <code>portfolio_registry</code> —
-            keeping data flow visible and debuggable.</p>
+            nine Python classes, each wrapping a discrete QuantLib capability
+            with typed input/output contracts — Curve, RiskPortfolio,
+            Instrument, Scenario, Pricing, PortfolioRiskAggregation,
+            ScenarioLoader, <strong>RiskInterpretation</strong> (attribution,
+            thresholds, commentary), and Reporting. They share state through
+            two plain dictionaries — <code>curve_registry</code> and
+            <code>portfolio_registry</code> — keeping data flow visible and
+            debuggable.</p>
 
           <p>The agent orchestrator (<code>QLRiskAgent</code>) walks a plan,
             resolves parameter references (via <code>context.X</code> and
@@ -242,8 +253,11 @@
 
           <p>The seven-step workflow is fully deterministic — the same inputs
             always produce the same intermediate steps and the same numerical
-            results. An LLM generates the plan structure; a hardcoded fallback
-            ensures the production path never surprises you.</p>
+            results. The plan is <strong>hardcoded</strong> by design: in a
+            regulated risk environment, deterministic execution paths are
+            critical for auditability. Each skill enforces strict typed
+            contracts (Python type hints), preventing malformed data from
+            propagating and enabling isolated unit testing.</p>
 
           <h2 id="data-model">Data model</h2>
 
@@ -293,6 +307,27 @@
             link — avoiding corruption of the registry's curves for subsequent
             scenarios.</p>
 
+          <h2 id="risk-explanation">Risk explanation</h2>
+          <p>PV and DV01 alone do not tell a risk manager <em>why</em> the
+            portfolio behaved a certain way. The Risk Explanation Layer adds
+            structured reasoning after aggregation — trade-level attribution,
+            configurable threshold breach detection, cross-scenario comparison,
+            and plain-language commentary — without reading raw numbers.</p>
+          <p>The entry point is <code>explain_risk</code> in
+            <code>ql_engine/risk_interpretation.py</code>, exposed through the
+            <strong>RiskInterpretationSkill</strong>. It delegates to four
+            sub-functions — <code>span</code> (attribution by trade),
+            <code>threshold_breaches</code> (PV/DV01 limit checks),
+            <code>scenario_comparison</code> (best/worst case, marginal
+            effects), and <code>generate_risk_commentary</code> (narrative
+            synthesis) — returning a structured dict with all analyses plus a
+            <code>commentary</code> string.</p>
+          <p>For the CCAR run below, the commentary reads: <em>"Across 2
+            scenarios, portfolio PV ranges from $5,274,617.33 (parallel_25bp)
+            to $5,278,383.75 (parallel_10bp), a spread of $3,766.42. The top
+            risk driver is 'IRS001' (IRS) at 52.6% of portfolio notional. No
+            risk limits breached."</em></p>
+
           <h2 id="results">Results</h2>
 
           <p>Pipeline on a four-asset portfolio (market curve: flat 2.0%):</p>
@@ -328,20 +363,37 @@
           <p><img src="./images/pv_dv01_results.png" alt="PV and DV01"
               title="PV and DV01 under CCAR shocks"></p>
 
+          <p><strong>Key observations.</strong> The 25 bps shock produces a
+            <em>lower</em> portfolio PV than the 10 bps shock, as expected for
+            a portfolio dominated by fixed-rate instruments (bond + receiver
+            swap) that lose value when rates rise. The PV difference of
+            ~$3,766 is consistent with the aggregate DV01 of approximately
+            −$250/bps × 15 bps = −$3,750. The DV01 for the 10 bps scenario
+            (−$336.85) is larger in magnitude than the step-wise difference
+            suggests because DV01 is a 1 bps local perturbation whereas the
+            10→25 bps step involves a larger, non-local move.</p>
+
           <h2 id="quality">Quality assurance</h2>
 
           <p><img src="./images/qa_pipeline.png" alt="QA Pipeline"
               title="QA Pipeline"></p>
 
           <pre><code>ruff check .          # 0 issues
-mypy .                # 0 issues (43 source files)
-pytest -v             # 39/39 passed
+mypy .                # 0 issues (39 source files)
+pytest -v             # 24/24 passed
 </code></pre>
 
-          <p>12 unit tests cover each skill in isolation. 4 integration tests
-            exercise the full tool chain and CLI subprocess. 23 diagram renderer
-            tests validate every element type. All 39 tests are deterministic
-            and fast.</p>
+          <p><strong>Unit tests (9 files):</strong> portfolio loading &amp;
+            schema validation (2), curve construction (1), instrument building
+            (2), scenario shock generation (2), pricing (2), reporting (1),
+            aggregation (1), scenario loading (1), <strong>risk
+            interpretation</strong> — attribution, thresholds, comparison,
+            commentary (7).</p>
+          <p><strong>Integration tests (5 files):</strong> full agent tool
+            chain, multi-scenario pricing loop, reporting end-to-end, CLI
+            subprocess, and risk interpretation end-to-end.</p>
+          <p>All 24 tests are deterministic and fast. The pipeline also
+            includes 23 diagram renderer tests for visualizations.</p>
 
           <h2 id="running">Running it</h2>
 
@@ -355,6 +407,19 @@ python app/cli.py "Compute PV and DV01 under CCAR shocks" \
   --quotes tests/fixtures/market_quotes.json \
   --scenarios tests/fixtures/ccar_scenarios.json
 </code></pre>
+
+          <h2 id="looking-ahead">Looking ahead</h2>
+          <p>The current platform computes PV and DV01 with parallel and
+            steepener shocks across four asset classes (IRS, bonds, FX swaps,
+            options), with auditable JSON output and narrative summaries.
+            Planned extensions include an <strong>SA-CCR exposure engine</strong>
+            (trade-level PFE, hedging set aggregation, collateral modeling);
+            <strong>Monte Carlo simulation skills</strong> for XVA computations;
+            a <strong>FastAPI/React dashboard</strong> for interactive portfolio
+            management and downloadable reports; <strong>extended instrument
+            coverage</strong> (CDS, inflation swaps, cross-currency swaps,
+            exotics); and <strong>dynamic LLM planning</strong> with safety
+            guardrails for non-deterministic exploration.</p>
 
           <ul class="pa0">
 
