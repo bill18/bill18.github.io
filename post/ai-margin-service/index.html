@@ -163,21 +163,7 @@
           </ol>
 
           <h3 id="api-workflow">Unified API Workflow</h3>
-          <pre><code>[FastAPI Post Request] -> [PII Scrubber & Llama-3 NLP Parser]
-                             |
-                             v
-                       [Extracted JSON]
-                             |
-                             v
-                 [PyTorch Sensitivity Predictor] -> [Estimated Deltas (Ŷ)]
-                                                        |
-                                                        v
-                                             [Deterministic ISDA SIMM]
-                                                        |
-                                                        v
-                                            [MRM Guardrail Verification] -> [Fast STP JSON Response]
-                                                                         -> [Or Fallback to Traditional Repricer]</code></pre>
-
+          <p><img src="./images/unified_api_workflow.png" alt="Unified API Workflow" title="Unified API Workflow"></p>
 
           <h2 id="quant-ai">The Quant AI Engine</h2>
           <p>The core of the numerical speedup is mapping input yield curves to portfolio sensitivities, formulated as a non-linear regression problem. We define a deep neural network \(f(X; \Theta) = \hat{Y}\), where:</p>
