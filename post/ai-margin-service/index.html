@@ -536,7 +536,8 @@ async def process_initial_margin_pipeline(payload: MarginQueryRequest):
 
           <h2 id="disputes">AI-Driven Margin Dispute Resolution</h2>
           <p>When counterparties calculate different IM values for the same portfolio, a material margin dispute occurs. Regulatory bodies (such as the CFTC and EMIR) dictate that material margin disputes must be resolved rapidly. The service provides an automated dispute resolution workflow:</p>
-          <pre><code>[Dispute Flagged] -> [CRIF File Reconciliation] -> [XGBoost Mismatch Predictor] -> [Automated Legal Playbook]</code></pre>
+
+          <p><img src="./images/dispute_resolution_workflow.png" alt="Automated Dispute Resolution Workflow" title="Automated Dispute Resolution Workflow"></p>
           <ul>
             <li><strong>Automated CRIF Reconciliation:</strong> Automatically ingests Common Risk Representation Format (CRIF) files from both counterparties, executing vector comparison to identify which specific tenor node contains the largest sensitivity variance.</li>
             <li><strong>Predictive Cause Tagging:</strong> Utilizes an XGBoost classifier to categorize disputes into standard failure buckets (e.g., <em>Market Data Mismatch</em>, <em>Trade Population Mismatch</em>, <em>Classification Mismatch</em>).</li>
