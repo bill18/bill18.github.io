@@ -6,11 +6,19 @@
     <description>Recent content in Projects on Wenhua Wang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jun 2026 12:00:00 -0400</lastBuildDate>
-    <lastBuildDate>Mon, 22 Jun 2026 12:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2026 12:00:00 -0400</lastBuildDate>
     
 	<atom:link href="https://bill18.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AI-Based Initial Margin Service</title>
+      <link>https://bill18.github.io/post/ai-margin-service/</link>
+      <pubDate>Wed, 01 Jul 2026 12:00:00 -0400</pubDate>
+      
+      <guid>https://bill18.github.io/post/ai-margin-service/</guid>
+      <description>Accelerating regulatory Initial Margin (IM) calculations with a dual-engine architecture: a PyTorch deep learning sensitivity emulator and a financial NLP parser (Llama-3), validated under SR 11-7 model risk management guardrails.</description>
+    </item>
     
     <item>
       <title>QuantLib AI Risk Lab</title>

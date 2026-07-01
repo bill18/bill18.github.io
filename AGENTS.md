@@ -2,11 +2,14 @@
 
 Personal GitHub Pages site for Wenhua Wang (Quant Finance Developer), built with Hugo 0.74.3.
 
-## Structure
+## Key facts
 
-- **Built output is committed** — only `_site/` is gitignored. The repo contains generated HTML/CSS/JS directly on `master` (standard GitHub Pages workflow).
-- **No Hugo source files** in this repo — no `content/`, `layouts/`, `config.toml`, or theme files are tracked.
-- `distributex/` — standalone article ("Scaling Legacy Quant Engines: Design & Code with DistributeX") with multi-language demos (Python, C++, Java, C#). Its own `README.md` and `post.md` serve as entrypoints. Published at `/post/distributex/`.
+- **No build/test/lint/CI infrastructure.** Hugo source files are not tracked — generated HTML/CSS/JS are committed directly to `master`. Editing HTML files and committing is the deploy step.
+- **`.gitignore`** only excludes `_site/`.
+- **`dist/`** contains prebuilt CSS/JS assets — do not edit.
+- **Images** live at root `images/` (shared) or `post/<slug>/images/` (per-post).
+- **All pages are noindex** — `<meta NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">` on every page.
+- **Root static files:** `404.html`, `robots.txt`, `sitemap.xml`, `index.xml` (RSS/Atom feed per section).
 
 ## Key pages
 
@@ -14,24 +17,12 @@ Personal GitHub Pages site for Wenhua Wang (Quant Finance Developer), built with
 |---|---|
 | `/` | Home page |
 | `/about/` | Bio |
-| `/post/` | Projects listing (4 projects) |
 | `/contact/` | Contact form |
+| `/post/` | Projects listing (7 projects) |
 | `/post/ql-risk-lab/` | QuantLib AI Risk Lab |
 | `/post/tax-pipeline/` | OCR-LLM Tax Pipeline |
 | `/post/distributex/` | DistributeX article |
-
-## distributex/ demos
-
-All demo scripts assume they are run from the `distributex_wspp` root (not this repo root). Setup requires cmake, g++, python3, and related dependencies:
-
-```bash
-bash distributex/demos/demo_setup.sh        # system deps check
-python3 distributex/demos/python/run_demo.py # Python demo
-```
-
-See `distributex/demos/README.md` (375 lines) for full walkthrough.
-
-## Notes
-
-- No build, test, lint, or CI infrastructure exists in this repo.
-- `.gitignore` only excludes `_site/`.
+| `/post/ai-margin-service/` | AI Margin Service |
+| `/post/serverless-finance/` | Serverless Computing |
+| `/post/project-1/` | Project 1 |
+| `/post/project-2/` | Project 2 |
