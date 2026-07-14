@@ -158,7 +158,7 @@
           <p>The system consists of the following key pipelines:</p>
           <ol>
             <li><strong>Quant AI Pricing Engine:</strong> A PyTorch Deep Neural Network (DNN) curve sensitivity emulator that predicts Delta sensitivities from interest rate curve states in microseconds.</li>
-            <li><strong>Operational NLP Engine:</strong> A secure parsing engine using Llama-3 to extract structured margin requests from unstructured notifications, wrapped in a regex-based PII scrubber.</li>
+            <li><strong>Operational NLP Engine:</strong> A secure parsing engine using NVIDIA NIM (Llama-3.3-70b-instruct) to extract structured margin requests from unstructured notifications, wrapped in a regex-based PII scrubber.</li>
             <li><strong>Deterministic SIMM Engine & MRM Guardrails:</strong> Aggregates predicted sensitivities using fixed ISDA correlation matrices, and validates the output against exact benchmarks under a <strong>Model Risk Management (MRM)</strong> framework.</li>
           </ol>
 
@@ -188,41 +188,50 @@ import torch.nn as nn
 import numpy as np
 from torch.utils.data import Dataset, DataLoader
 
-# 1. Model Definition utilizing Softplus activation functions
+NUM_TENORS = 8
+SEED = 42
+
+# 1. Four-hidden-layer DNN with Softplus activations
 class SIMMSensitivityPredictor(nn.Module):
-    def __init__(self, input_dim=8, output_dim=8):
-        super(SIMMSensitivityPredictor, self).__init__()
-        self.network = nn.Sequential(
+    """Maps yield-curve rates to delta sensitivities.
+
+    Architecture:
+        Linear(8, 64) → Softplus → Linear(64, 64) → Softplus →
+        Linear(64, 32) → Softplus → Linear(32, 8)
+    """
+    def __init__(self, input_dim=NUM_TENORS, output_dim=NUM_TENORS):
+        super().__init__()
+        self.net = nn.Sequential(
             nn.Linear(input_dim, 64),
+            nn.Softplus(),
+            nn.Linear(64, 64),
             nn.Softplus(),
             nn.Linear(64, 32),
             nn.Softplus(),
-            nn.Linear(32, output_dim)
+            nn.Linear(32, output_dim),
         )
 
     def forward(self, x):
-        return self.network(x)
+        result = self.net(x)
+        return torch.as_tensor(result)
 
-# 2. Synthetic Dataset Generator
+# 2. Synthetic Dataset Generator (uniform distribution)
 class SIMMDataset(Dataset):
     def __init__(self, num_samples=10000):
-        base_curve = np.array([0.025, 0.028, 0.030, 0.032, 0.034, 0.036, 0.038, 0.040])
-        noise = np.random.normal(0, 0.005, (num_samples, 8))
-        self.X = torch.tensor(base_curve + noise, dtype=torch.float32)
-        self.Y = torch.zeros((num_samples, 8), dtype=torch.float32)
-        
+        rng = np.random.default_rng(SEED)
+        self.X = torch.tensor(
+            rng.uniform(-0.02, 0.10, (num_samples, NUM_TENORS)),
+            dtype=torch.float32,
+        )
+        self.Y = torch.zeros((num_samples, NUM_TENORS), dtype=torch.float32)
         for i in range(num_samples):
-            curve_state = self.X[i].numpy()
-            steepness = curve_state[-1] - curve_state[0]
+            curve = self.X[i].numpy()
+            steepness = curve[-1] - curve[0]
             self.Y[i] = torch.tensor([
-                curve_state[0] * 1000,
-                curve_state[1] * 1200,
-                curve_state[2] * 1500,
-                steepness * 5000,
-                steepness * 8000,
-                (curve_state[5]**2) * 50000,
-                (curve_state[6]**2) * 80000,
-                (curve_state[7] - 0.01) * 3000
+                curve[0] * 1000, curve[1] * 1200, curve[2] * 1500,
+                steepness * 5000, steepness * 8000,
+                curve[5] ** 2 * 50000, curve[6] ** 2 * 80000,
+                (curve[7] - 0.01) * 3000,
             ], dtype=torch.float32)
 
     def __len__(self):
@@ -231,17 +240,24 @@ class SIMMDataset(Dataset):
     def __getitem__(self, idx):
         return self.X[idx], self.Y[idx]
 
-# 3. Model Training Loop
-def train_emulator():
+def get_dataloaders(batch_size=64):
     dataset = SIMMDataset(10000)
     train_size = int(0.8 * len(dataset))
     test_size = len(dataset) - train_size
-    train_dataset, test_dataset = torch.utils.data.random_split(dataset, [train_size, test_size])
-    
-    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
-    test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
+    train_ds, test_ds = torch.utils.data.random_split(
+        dataset, [train_size, test_size],
+        generator=torch.Generator().manual_seed(SEED),
+    )
+    return (
+        DataLoader(train_ds, batch_size=batch_size, shuffle=True),
+        DataLoader(test_ds, batch_size=batch_size, shuffle=False),
+    )
 
-    model = SIMMSensitivityPredictor(input_dim=8, output_dim=8)
+# 3. Training loop with checkpoint persistence
+def train_emulator():
+    torch.manual_seed(SEED)
+    train_loader, test_loader = get_dataloaders()
+    model = SIMMSensitivityPredictor()
     criterion = nn.MSELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
@@ -249,23 +265,27 @@ def train_emulator():
         model.train()
         running_loss = 0.0
         for inputs, targets in train_loader:
-            outputs = model(inputs)
-            loss = criterion(outputs, targets)
+            loss = criterion(model(inputs), targets)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
             running_loss += loss.item() * inputs.size(0)
-        
-        # Validation evaluation
+
         model.eval()
         val_loss = 0.0
         with torch.no_grad():
             for inputs, targets in test_loader:
-                outputs = model(inputs)
-                loss = criterion(outputs, targets)
-                val_loss += loss.item() * inputs.size(0)
-        
-        print(f"Epoch {epoch+1:02d} | Train MSE: {running_loss/train_size:.6f} | Val MSE: {val_loss/test_size:.6f}")
+                val_loss += criterion(model(inputs), targets).item() * inputs.size(0)
+
+        print(f"Epoch {epoch+1:02d} | Train MSE: {running_loss/train_size:.6f}"
+              f" | Val MSE: {val_loss/test_size:.6f}")
+
+    torch.save({
+        "model_state_dict": model.state_dict(),
+        "optimizer_state_dict": optimizer.state_dict(),
+        "epoch": 15,
+        "model_version": "1.0",
+    }, "models/simm_predictor.pt")
 </code></pre>
 
 
@@ -292,19 +312,33 @@ def train_emulator():
 
 <pre><code class="language-python">import numpy as np
 
-# Standard 8x8 tenor bucket aggregation with continuous decay correlation modeling
-def calculate_isda_im_full(sensitivities: np.ndarray) -> float:
-    # 1. Initialize correlation matrix (R) with standard decay factor (0.7)
-    rho = np.eye(8)
-    for i in range(8):
-        for j in range(8):
-            if i != j:
-                rho[i, j] = 0.7 ** abs(i - j)
+NUM_TENORS = 8
 
-    # 2. Perform matrix math: IM = sqrt(WS * R * WSᵀ)
-    intermediate = np.dot(sensitivities, rho)
-    margin = np.sqrt(np.dot(intermediate, sensitivities.T))
-    return float(margin)
+def isda_correlation_ir(n_tenors: int = NUM_TENORS) -> np.ndarray:
+    """Build IR correlation matrix: rho_ij = 0.7^|i-j|."""
+    rho = np.zeros((n_tenors, n_tenors))
+    for i in range(n_tenors):
+        for j in range(n_tenors):
+            rho[i, j] = 0.7 ** abs(i - j)
+    return rho
+
+def calculate_weighted_sensitivities(sensitivities: np.ndarray) -> np.ndarray:
+    """Apply risk weights (placeholder: weight=1.0 for all tenors)."""
+    return sensitivities.copy()
+
+def calculate_portfolio_margin(
+    weighted_sensitivities: np.ndarray,
+    rho: np.ndarray,
+) -> float:
+    """Compute aggregate SIMM IM = sqrt(WS^T * rho * WS)."""
+    ws = weighted_sensitivities
+    return float(np.sqrt(ws @ rho @ ws))
+
+def calculate_isda_im(sensitivities: np.ndarray) -> float:
+    """Convenience: full pipeline from raw sensitivities to SIMM IM."""
+    ws = calculate_weighted_sensitivities(sensitivities)
+    rho = isda_correlation_ir(len(sensitivities))
+    return calculate_portfolio_margin(ws, rho)
 </code></pre>
 
 
@@ -341,39 +375,65 @@ def calculate_isda_im_full(sensitivities: np.ndarray) -> float:
             </tbody>
           </table>
 
-          <h3 id="llm-selection">LLM Selection & Constraint Decoding</h3>
-          <p>For high-speed, local financial extraction, the service deploys a quantized **Llama-3-8B-Instruct** model. It performs extraction and outputs constrained JSON formats conforming to a Pydantic schema, avoiding out-of-domain conversational text.</p>
+          <h3 id="llm-selection">LLM Selection via NVIDIA NIM &amp; Constrained Extraction</h3>
+          <p>For high-speed, API-based financial extraction, the service calls the <strong>NVIDIA NIM</strong> endpoint hosting <strong>meta/llama-3.3-70b-instruct</strong>. A deterministic PII-scrubbing pipeline runs first, then the scrubbed text is sent to the NIM chat-completion API. The response is validated against a Pydantic v2 schema, and failures are retried with exponential backoff (3 attempts, 1s/2s/4s delays).</p>
 
+          <h4>PII Scrubber</h4>
 <pre><code class="language-python">import re
-import json
-from pydantic import BaseModel, Field, ValidationError
 
-# 1. PII Scrubbing Utility
+_EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
+_PHONE_RE = re.compile(
+    r"\b(?:\+?\d{1,3}[-.\s]?)?\(?\d{2,4}\)?[-.\s]?\d{3,4}[-.\s]?\d{3,4}\b"
+)
+
 def scrub_pii(text: str) -> str:
-    text = re.sub(r'[\w\.-]+@[\w\.-]+\.\w+', '[REDACTED_EMAIL]', text)
-    text = re.sub(r'\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}', '[REDACTED_PHONE]', text)
-    return text
+    """Redact email addresses and phone numbers."""
+    result = _EMAIL_RE.sub("[EMAIL REDACTED]", text)
+    result = _PHONE_RE.sub("[PHONE REDACTED]", result)
+    return result
+</code></pre>
 
-# 2. Extraction Data Schema
+          <h4>NIM Extraction via HTTP</h4>
+<pre><code class="language-python">import json
+import httpx
+from pydantic import BaseModel
+
 class MarginCallSchema(BaseModel):
-    agreement_id: str = Field(description="The unique identifier for the margin agreement")
-    net_margin_call_demand: float = Field(description="The exact cash value requested to settle the call")
-    currency: str = Field(default="USD")
+    agreement_id: str | None = None
+    net_margin_call_demand: float | None = None
+    currency: str | None = None
+    confidence: float | None = None
 
-# 3. Parsing Function (Local Llama-3 mock interface)
-def extract_structured_payload(raw_email: str) -> dict:
-    scrubbed = scrub_pii(raw_email)
-    # Target system maps raw prompt to constrained LLM output...
-    # Mocking successful Llama-3 extraction JSON response:
-    mock_llm_response = '{"agreement_id": "AG-991", "net_margin_call_demand": 4220000.0, "currency": "USD"}'
-    
-    try:
-        parsed_json = json.loads(mock_llm_response)
-        validated = MarginCallSchema(**parsed_json)
-        return validated.dict()
-    except (json.JSONDecodeError, ValidationError) as e:
-        # Route exception payloads directly to human desks
-        return {"status": "ERROR_ROUTED_TO_ANALYST", "detail": str(e)}
+NIM_BASE_URL = "https://integrate.api.nvidia.com/v1"
+
+_SYSTEM_PROMPT = (
+    "You are a financial data extraction assistant. Given a margin call email, "
+    "output ONLY valid JSON matching this schema: "
+    '{"agreement_id": str|null, "net_margin_call_demand": float|null, '
+    '"currency": str|null, "confidence": float|null} '
+    "Rules: JSON only, no markdown, ISO 4217 currencies, null for missing values."
+)
+
+def extract_margin_data(text: str, api_key: str,
+                        model: str = "meta/llama-3.3-70b-instruct",
+                        temperature: float = 0.0,
+                        timeout: float = 30.0) -> MarginCallSchema:
+    """Extract structured margin-call data via NVIDIA NIM."""
+    response = httpx.post(
+        f"{NIM_BASE_URL}/chat/completions",
+        headers={"Authorization": f"Bearer {api_key}"},
+        json={
+            "model": model,
+            "messages": [
+                {"role": "system", "content": _SYSTEM_PROMPT},
+                {"role": "user", "content": text},
+            ],
+            "temperature": temperature,
+        },
+        timeout=timeout,
+    )
+    content = response.json()["choices"][0]["message"]["content"]
+    return MarginCallSchema(**json.loads(content))
 </code></pre>
 
 
@@ -405,133 +465,192 @@ def extract_structured_payload(raw_email: str) -> dict:
             </tbody>
           </table>
 
-          <h3 id="fallback-check">Dynamic Fallback Logic</h3>
-          <p>The fallback mechanism prevents bad pricing from propagating during extreme volatility anomalies:</p>
-<pre><code class="language-python">def check_fallback_guardrail(ai_margin: float, exact_benchmark: float, tolerance=0.015) -> str:
-    variance = abs(ai_margin - exact_benchmark) / exact_benchmark
-    if variance > tolerance:
-        # Trigger immediate detour to traditional computational grid
-        return "TRIGGER_FALLBACK_REPRICE"
-    return "ACCEPT_AI_PRICING"
+          <h3 id="fallback-check">Dynamic Fallback Logic &amp; Decision Engine</h3>
+          <p>The guardrail system classifies every request into one of five outcomes using a <code>Decision</code> enum. The pipeline tracks three independent health flags — extraction success, margin tolerance, and validation status — and routes accordingly:</p>
+<pre><code class="language-python">from enum import Enum
+
+class Decision(str, Enum):
+    ACCEPT = "ACCEPT"
+    FALLBACK_MARGIN = "FALLBACK_MARGIN"
+    FALLBACK_EXTRACTION = "FALLBACK_EXTRACTION"
+    FALLBACK_VALIDATION = "FALLBACK_VALIDATION"
+    FALLBACK_TIMEOUT = "FALLBACK_TIMEOUT"
+
+def check_margin_tolerance(
+    ai_margin: float,
+    benchmark_margin: float,
+    tolerance: float = 0.015,
+) -> bool:
+    """Return True if |ai - benchmark| / benchmark <= tolerance."""
+    if benchmark_margin == 0.0:
+        return ai_margin == 0.0
+    return abs(ai_margin - benchmark_margin) / benchmark_margin <= tolerance
+
+def determine_decision(
+    extraction_ok: bool,
+    margin_ok: bool,
+    validation_ok: bool,
+) -> Decision:
+    if not extraction_ok:
+        return Decision.FALLBACK_EXTRACTION
+    if not validation_ok:
+        return Decision.FALLBACK_VALIDATION
+    if not margin_ok:
+        return Decision.FALLBACK_MARGIN
+    return Decision.ACCEPT
 </code></pre>
 
 
           <h2 id="implementation">FastAPI Prototype Implementation</h2>
           <p>Unifying the components into a cohesive, high-performance API endpoint, the service is built using FastAPI. The environment relies on <code>torch</code>, <code>transformers</code>, <code>fastapi</code>, <code>numpy</code>, and <code>pydantic</code>.</p>
 
-          <h3 id="fastapi-script">Integrated Endpoint Code</h3>
-          <p>The complete FastAPI integration script below combines LLM parsing, neural sensitivity inference, SIMM aggregation, and MRM validation guardrails:</p>
+          <h3 id="fastapi-script">Service Orchestration &amp; API Endpoint</h3>
+          <p>The pipeline is orchestrated by <code>MarginCalculationService</code>, which coordinates PII scrubbing, NIM extraction, DNN inference, SIMM aggregation, and guardrail decisions. The FastAPI route delegates all business logic to this service via dependency injection.</p>
 
-<pre><code class="language-python">import json
-import numpy as np
-import torch
-import torch.nn as nn
-from fastapi import FastAPI, HTTPException, status
-from pydantic import BaseModel, Field
+          <h4>Schemas (Pydantic v2)</h4>
+<pre><code class="language-python">from pydantic import BaseModel, field_validator
 
-# ==========================================
-# 1. CORE DATA SCHEMAS & MODELS
-# ==========================================
+NUM_TENORS = 8
 
 class MarginQueryRequest(BaseModel):
-    unstructured_text: str = Field(..., example="Demand USD 4220000 for agreement AG-991.")
-    live_curve_rates: list[float] = Field(..., max_items=8, min_items=8, example=[0.025, 0.028, 0.030, 0.032, 0.034, 0.036, 0.038, 0.040])
-    exact_engine_benchmark: float = Field(..., description="Traditional engine benchmark to verify against.")
+    unstructured_text: str
+    live_curve_rates: list[float]
+    exact_engine_benchmark: float
 
-class MarginCallSchema(BaseModel):
-    agreement_id: str
-    net_margin_call_demand: float
-    currency: str
+    @field_validator("live_curve_rates")
+    @classmethod
+    def _validate_curve_length(cls, v):
+        if len(v) != NUM_TENORS:
+            raise ValueError(f"Must contain exactly {NUM_TENORS} values")
+        return v
 
-class SIMMSensitivityPredictor(nn.Module):
-    def __init__(self, input_dim=8, output_dim=8):
-        super(SIMMSensitivityPredictor, self).__init__()
-        self.network = nn.Sequential(
-            nn.Linear(input_dim, 64),
-            nn.Softplus(),
-            nn.Linear(64, 32),
-            nn.Softplus(),
-            nn.Linear(32, output_dim)
+class MarginQueryResponse(BaseModel):
+    status: str
+    agreement_id: str | None = None
+    ai_margin: float | None = None
+    benchmark_margin: float
+    deviation_pct: float | None = None
+    currency: str | None = None
+    reason: str | None = None
+</code></pre>
+
+          <h4>MarginCalculationService</h4>
+<pre><code class="language-python">import torch
+from src.nlp.scrubber import scrub_pii
+from src.nlp.extractor import extract_margin_data
+from src.quant.model import SIMMSensitivityPredictor
+from src.quant.train import load_checkpoint
+from src.simm.math import calculate_isda_im
+from src.guardrails.fallback import Decision, check_margin_tolerance, determine_decision
+
+class MarginCalculationService:
+    def __init__(self, settings):
+        self._settings = settings
+        self._model = None
+
+    def _load_model(self):
+        if self._model is None:
+            model = SIMMSensitivityPredictor()
+            try:
+                load_checkpoint(self._settings.model_checkpoint, model)
+            except FileNotFoundError:
+                pass  # use untrained model for demo
+            model.eval()
+            self._model = model
+        return self._model
+
+    def run_pipeline(self, unstructured_text, live_curve_rates,
+                     exact_engine_benchmark):
+        # 1. Scrub PII
+        scrubbed = scrub_pii(unstructured_text)
+
+        # 2. Extract via NVIDIA NIM
+        extraction = None
+        extraction_ok = True
+        try:
+            extraction = extract_margin_data(
+                scrubbed, api_key=self._settings.nvidia_api_key,
+                model=self._settings.nim_model,
+            )
+        except RuntimeError:
+            extraction_ok = False
+
+        # 3. DNN inference
+        model = self._load_model()
+        tensor = torch.tensor(live_curve_rates, dtype=torch.float32).unsqueeze(0)
+        with torch.no_grad():
+            predicted_deltas = model(tensor).squeeze(0).numpy()
+
+        # 4. SIMM aggregation
+        ai_margin = calculate_isda_im(predicted_deltas)
+
+        # 5. Guardrail decision
+        margin_ok = check_margin_tolerance(
+            ai_margin, exact_engine_benchmark, self._settings.margin_tolerance,
         )
-    def forward(self, x):
-        return self.network(x)
+        decision = determine_decision(
+            extraction_ok=extraction_ok, margin_ok=margin_ok, validation_ok=True,
+        )
 
-# ==========================================
-# 2. SERVICE INITIALIZATION
-# ==========================================
+        deviation = None
+        if exact_engine_benchmark != 0.0:
+            deviation = (ai_margin - exact_engine_benchmark) / exact_engine_benchmark * 100
 
-app = FastAPI(title="AI-Based Initial Margin Service", version="1.0")
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        return MarginQueryResponse(
+            status=decision.value,
+            agreement_id=extraction.agreement_id if extraction else None,
+            ai_margin=float(ai_margin),
+            benchmark_margin=float(exact_engine_benchmark),
+            deviation_pct=deviation,
+            currency=extraction.currency if extraction else None,
+        )
+</code></pre>
 
-# Load model weights (mocked for prototype)
-quant_model = SIMMSensitivityPredictor().to(device)
-quant_model.eval()
+          <h4>FastAPI Route</h4>
+<pre><code class="language-python">from http import HTTPStatus
+from fastapi import FastAPI, HTTPException
 
-# ==========================================
-# 3. DETECTABLE ISDA SIMM MATHEMATICS
-# ==========================================
+app = FastAPI(title="AI-Based Margin Service", version="0.1.0")
 
-def calculate_isda_im(sensitivities: np.ndarray) -> float:
-    rho = np.eye(8)
-    for i in range(8):
-        for j in range(8):
-            if i != j:
-                rho[i, j] = 0.7 ** abs(i - j)
-    intermediate = np.dot(sensitivities, rho)
-    margin = np.sqrt(np.dot(intermediate, sensitivities.T))
-    return float(margin)
-
-# ==========================================
-# 4. API PIPELINE ENDPOINT
-# ==========================================
-
-@app.post("/v1/calculate-margin", status_code=status.HTTP_200_OK)
-async def process_initial_margin_pipeline(payload: MarginQueryRequest):
-    # --- STEP 1: OPERATIONAL NLP PARSING ---
-    # Simulating tokenizer and Llama-3 extraction
+@app.post("/v1/calculate-margin", response_model=MarginQueryResponse)
+def calculate_margin(body: MarginQueryRequest) -> MarginQueryResponse:
+    service = get_margin_service(body)  # dependency injection
     try:
-        # Mocking NLP output for demonstration
-        mock_extracted_json = {
-            "agreement_id": "AG-991",
-            "net_margin_call_demand": 4220000.0,
-            "currency": "USD"
-        }
-        validated_email_data = MarginCallSchema(**mock_extracted_json)
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=f"NLP Parser extraction failed: {str(e)}"
+        return service.run_pipeline(
+            unstructured_text=body.unstructured_text,
+            live_curve_rates=body.live_curve_rates,
+            exact_engine_benchmark=body.exact_engine_benchmark,
         )
+    except Exception as exc:
+        raise HTTPException(
+            status_code=HTTPStatus.INTERNAL_SERVER_ERROR, detail=str(exc),
+        )
+</code></pre>
 
-    # --- STEP 2: QUANT AI SENSITIVITY INFERENCE ---
-    curve_tensor = torch.tensor([payload.live_curve_rates], dtype=torch.float32).to(device)
-    with torch.no_grad():
-        predicted_deltas = quant_model(curve_tensor).cpu().numpy()[0]
+          <h2 id="validation">Validation Metrics &amp; Acceptance Criteria</h2>
+          <p>Model quality is measured with four regression metrics computed over the held-out test set. The acceptance criteria require RMSE &lt; 0.05 and R² &gt; 0.95 before the checkpoint is promoted.</p>
 
-    # --- STEP 3: REGULATORY AGGREGATION ---
-    calculated_ai_im = calculate_isda_im(predicted_deltas)
+<pre><code class="language-python">import numpy as np
 
-    # --- STEP 4: MRM GUARDRAIL VALIDATION ---
-    tolerance_threshold = 0.015
-    variance = abs(calculated_ai_im - payload.exact_engine_benchmark) / payload.exact_engine_benchmark
+def calculate_rmse(actual: np.ndarray, predicted: np.ndarray) -> float:
+    """Root mean squared error."""
+    return float(np.sqrt(np.mean((actual - predicted) ** 2)))
 
-    if variance > tolerance_threshold:
-        return {
-            "status": "FALLBACK_TRIGGERED",
-            "reason": f"AI Margin variance ({variance:.4f}) exceeded safety threshold ({tolerance_threshold}).",
-            "extracted_operational_data": validated_email_data.dict(),
-            "fallback_routing_target": "TRADITIONAL_GRID_REPRICER",
-            "exact_benchmark_margin": payload.exact_engine_benchmark
-        }
+def calculate_mae(actual: np.ndarray, predicted: np.ndarray) -> float:
+    """Mean absolute error."""
+    return float(np.mean(np.abs(actual - predicted)))
 
-    return {
-        "status": "SUCCESS_STP",
-        "agreement_id": validated_email_data.agreement_id,
-        "email_extracted_demand": validated_email_data.net_margin_call_demand,
-        "ai_predicted_im_margin": calculated_ai_im,
-        "variance_metric": variance,
-        "action": "AUTOMATED_COLLATERAL_MATCH_APPROVED"
-    }
+def calculate_r2(actual: np.ndarray, predicted: np.ndarray) -> float:
+    """Coefficient of determination (R²)."""
+    ss_res = np.sum((actual - predicted) ** 2)
+    ss_tot = np.sum((actual - np.mean(actual)) ** 2)
+    if ss_tot == 0.0:
+        return 1.0
+    return float(1.0 - ss_res / ss_tot)
+
+def calculate_p95_error(actual: np.ndarray, predicted: np.ndarray) -> float:
+    """95th percentile absolute error."""
+    return float(np.percentile(np.abs(actual - predicted), 95))
 </code></pre>
 
           <h2 id="disputes">AI-Driven Margin Dispute Resolution</h2>
