@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>C++ Framework for LLM Agent Development | Wenhua Wang</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.74.3" />
+
+    <meta NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+    <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+
+    <meta property="og:title" content="C++ Framework for LLM Agent Development" />
+    <meta property="og:description" content="A C++20 framework for building autonomous LLM agents with deterministic control, token-aware conversation compression, and declarative skills." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="/post/ai-sdk-ext/" />
+    <meta property="article:published_time" content="2026-07-21T12:00:00-04:00" />
+    <meta property="article:modified_time" content="2026-07-21T12:00:00-04:00" />
+    <meta itemprop="name" content="C++ Framework for LLM Agent Development">
+    <meta itemprop="description" content="A C++20 framework for building autonomous LLM agents with deterministic control, token-aware conversation compression, and declarative skills.">
+    <meta itemprop="datePublished" content="2026-07-21T12:00:00-04:00" />
+    <meta itemprop="dateModified" content="2026-07-21T12:00:00-04:00" />
+    <meta itemprop="wordCount" content="1800">
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="C++ Framework for LLM Agent Development" />
+    <meta name="twitter:description" content="A C++20 framework for building autonomous LLM agents with deterministic control, token-aware conversation compression, and declarative skills." />
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    <header class="cover bg-top" style="background-image: url('/images/markus-spiske-qjnAnF0jIGk-unsplash.jpg');">
+      <div class="pb3-m pb6-l bg-black-60">
+        <nav class="pv3 ph3 ph4-ns" role="navigation">
+          <div class="flex-l justify-between items-center center">
+            <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+              Wenhua Wang
+            </a>
+            <div class="flex-l items-center">
+
+              <ul class="pl0 mr3">
+
+                <li class="list f5 f4-ns fw4 dib pr3">
+                  <a class="hover-white no-underline white-90" href="/about/"
+                    title="About page">
+                    About
+                  </a>
+                </li>
+
+                <li class="list f5 f4-ns fw4 dib pr3">
+                  <a class="hover-white no-underline white-90" href="/contact/"
+                    title="Contact page">
+                    Contact
+                  </a>
+                </li>
+
+                <li class="list f5 f4-ns fw4 dib pr3">
+                  <a class="hover-white no-underline white-90" href="/post/"
+                    title="Projects page">
+                    Projects
+                  </a>
+                </li>
+
+              </ul>
+
+              <a href="https://www.linkedin.com/in/wenhua-w-39108190/" target="_blank"
+                class="link-transition linkedin link dib z-999 pt3 pt0-l mr1"
+                title="LinkedIn link" rel="noopener"
+                aria-label="follow on LinkedIn——Opens in a new window">
+                <svg height="32px" style="enable-background:new 0 0 65 65;"
+                  version="1.1" viewBox="0 0 65 65" width="32px"
+                  xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <path
+                    d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z"
+                    style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+                </svg>
+
+                <span class="new-window"><svg height="8px"
+                    style="enable-background:new 0 0 1000 1000;" version="1.1"
+                    viewBox="0 0 1000 1000" width="8px" xml:space="preserve"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path
+                      d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z"
+                      style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+                  </svg>
+                </span></a>
+
+              <a href="https://github.com/bill18" target="_blank"
+                class="link-transition github link dib z-999 pt3 pt0-l mr1"
+                title="Github link" rel="noopener"
+                aria-label="follow on Github——Opens in a new window">
+                <svg height="32px" style="enable-background:new 0 0 512 512;"
+                  version="1.1" viewBox="0 0 512 512" width="32px"
+                  xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <path
+                    d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z" />
+                </svg>
+
+                <span class="new-window"><svg height="8px"
+                    style="enable-background:new 0 0 1000 1000;" version="1.1"
+                    viewBox="0 0 1000 1000" width="8px" xml:space="preserve"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path
+                      d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z"
+                      style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+                  </svg>
+                </span></a>
+
+            </div>
+          </div>
+        </nav>
+
+        <div class="tc-l pv6 ph3 ph4-ns">
+
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">C++ Framework for LLM
+            Agent Development</h1>
+
+          <h2
+            class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+            A production-grade C++20 framework for autonomous LLM agents with deterministic control, token-aware compression, and declarative skills.
+          </h2>
+
+        </div>
+      </div>
+    </header>
+
+    <main class="pb7" role="main">
+
+      <article class="flex-l flex-wrap justify-between mw8 center ph3">
+        <header class="mt4 w-100">
+          <aside class="instapaper_ignoref b helvetica tracked">
+
+            PROJECTS
+          </aside>
+
+          <div id="sharing" class="mt3">
+
+            <a href="https://www.facebook.com/sharer.php?u=/post/ai-sdk-ext/"
+              class="facebook no-underline" aria-label="share on Facebook">
+              <svg height="32px" style="enable-background:new 0 0 67 67;"
+                version="1.1" viewBox="0 0 67 67" width="32px"
+                xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"><path
+                  d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z"
+                  style="fill-rule:evenodd;clip-rule:evenodd;" /></svg>
+
+            </a>
+
+            <a
+              href="https://twitter.com/share?url=/post/ai-sdk-ext/&amp;text=C++%20Framework%20for%20LLM%20Agent%20Development"
+              class="twitter no-underline" aria-label="share on Twitter">
+              <svg height="32px" style="enable-background:new 0 0 67 67;"
+                version="1.1" viewBox="0 0 67 67" width="32px"
+                xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"><path
+                  d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z"
+                  style="fill-rule:evenodd;clip-rule:evenodd;fill:;" /></svg>
+
+            </a>
+
+            <a
+              href="https://www.linkedin.com/shareArticle?mini=true&amp;url=/post/ai-sdk-ext/&amp;title=C++%20Framework%20for%20LLM%20Agent%20Development"
+              class="linkedin no-underline" aria-label="share on LinkedIn">
+              <svg height="32px" style="enable-background:new 0 0 65 65;"
+                version="1.1" viewBox="0 0 65 65" width="32px"
+                xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path
+                  d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z"
+                  style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+              </svg>
+
+            </a>
+          </div>
+
+          <h1 class="f1 athelas mt3 mb1">C++ Framework for LLM Agent
+            Development</h1>
+
+          <time class="f6 mv4 dib tracked"
+            datetime="2026-07-21T12:00:00-04:00">July 21, 2026</time>
+
+        </header>
+        <div
+          class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+          <p>Most AI agents are built in Python or TypeScript. Both are excellent
+            languages. Both have real limitations for production agent systems.
+            Understanding where they shine &mdash; and where they don't &mdash; is the starting
+            point for this framework.</p>
+
+          <h2 id="python-the-ai-ecosystem-default">Python: The AI Ecosystem Default</h2>
+
+          <p>Python dominates AI/ML for good reason. LangChain, CrewAI,
+            LlamaIndex, AutoGen, and DSPy are all Python-native. PyTorch and
+            Hugging Face have no TypeScript equivalent. If you're training models,
+            running retrieval pipelines, or iterating on agent behavior in
+            notebooks, Python is the right choice. The library depth is unmatched,
+            and the research community publishes Python code first.</p>
+
+          <p>But Python has structural costs. The Global Interpreter Lock limits
+            true parallelism &mdash; even with Python 3.13's experimental free-threading,
+            most production environments are still GIL-bound. Object allocation
+            and garbage collection add memory overhead: Python agent frameworks
+            consume 2-5 MB per session, compared to sub-KB in systems languages.
+            And environment management (venv, conda, pip version conflicts) is a
+            real tax on small teams shipping fast.</p>
+
+          <h2 id="typescript-the-full-stack-contender">TypeScript: The Full-Stack Contender</h2>
+
+          <p>TypeScript has become the language of product-embedded agents.
+            Vercel AI SDK, LangChain.js, and Mastra have matured rapidly. An
+            estimated 60-70% of Y Combinator's Winter 2025 AI startups built
+            agents in TypeScript &mdash; primarily because small teams can own the entire
+            stack (frontend, API, AI middleware) in one language with shared types.
+            Compile-time type safety catches malformed tool-call schemas before
+            they reach production. Node.js's non-blocking event loop handles
+            streaming and real-time UX natively, with lower cold starts on
+            serverless platforms.</p>
+
+          <p>The gap: TypeScript's AI/ML library depth lags Python by 12-18
+            months. There is no equivalent to Hugging Face Transformers, PyTorch,
+            or the deep RAG tooling ecosystem. Multi-agent collaboration
+            frameworks (CrewAI, AutoGen) are Python-native. If your agent needs
+            local model inference, custom embeddings, or fine-tuning, you'll end
+            up calling a Python service anyway.</p>
+
+          <h2 id="c-the-production-control-layer">C++: The Production Control Layer</h2>
+
+          <p>C++ is not a replacement for Python or TypeScript. It occupies a
+            different layer entirely. Where Python excels at rapid iteration and
+            TypeScript at full-stack cohesion, C++ provides <strong>deterministic
+              control</strong> over the agent runtime &mdash; no garbage collector pausing
+            mid-tool-call, no GIL serializing parallel execution, no interpreter
+            overhead adding milliseconds to every dispatch.</p>
+
+          <p>Benchmark data makes this concrete: C++ agent runtimes achieve ~0.8
+            KB memory per session versus 2-5 MB in Python frameworks. Scheduling
+            overhead drops from ~50-100 microseconds to ~300 nanoseconds. At 100
+            concurrent agents, peak RSS stays under 100 MB. These numbers matter
+            when you're running thousands of agent sessions &mdash; not for a demo, but
+            as a production service with SLA commitments.</p>
+
+          <p>The trade-off is real: steeper learning curve, longer development
+            cycles, smaller ecosystem. The honest answer is that most teams should
+            use Python or TypeScript for agent behavior. C++ belongs where the
+            runtime itself is the bottleneck &mdash; production inference orchestration,
+            edge deployment, latency-critical tool execution, or multi-tenant
+            platforms where per-session memory directly drives infrastructure
+            cost.</p>
+
+          <h2 id="why-this-framework-exists">Why This Framework Exists</h2>
+
+          <p><strong>ai-sdk-ext</strong> is a C++20 framework for building
+            autonomous LLM agents. It is not a wrapper around a Python runtime.
+            It is a from-scratch systems-level approach to agent orchestration &mdash;
+            designed for low latency, predictable resource usage, and production
+            deployment without dependency chains. It sits alongside Python and
+            TypeScript agent stacks, not against them &mdash; providing the runtime
+            control layer that those languages cannot.</p>
+
+          <h2 id="the-three-hard-problems-in-agent-design">The Three Hard Problems in Agent Design</h2>
+
+          <p>Building a chatbot is easy. Building an autonomous agent that
+            reliably uses tools, manages its own context, and doesn't spin into
+            infinite loops is a systems engineering problem. Here are the three
+            challenges that matter.</p>
+
+          <h3 id="1-context-windows-are-finite-conversations-are-not">1. Context Windows Are Finite. Conversations Are Not.</h3>
+
+          <p>Every LLM has a token limit. Agent conversations grow with every
+            user message, every tool result, and every intermediate reasoning
+            step. <strong>Naive truncation is dangerous</strong> &mdash; cutting the wrong
+            message can lose a critical database schema or a constraint the user
+            stated five turns ago.</p>
+
+          <p>The non-obvious insight: <strong>tool messages must never be
+              compressed.</strong> They contain structured data &mdash; query results,
+            schema definitions, error messages &mdash; that the model needs verbatim to
+            reason correctly. Chat messages can be summarized. Tool results
+            cannot.</p>
+
+          <p>The framework solves this with <code>ConversationCompressor</code>
+            and <code>TokenEstimator</code>. The compressor walks the full message
+            history, estimates tokens per message using a zero-dependency
+            character-walk heuristic (~0.35 tokens/char for English), and applies
+            a chunking algorithm that summarizes older chat messages while passing
+            tool results through untouched. Recent context is always kept
+            verbatim.</p>
+
+          <p>This is not a nice-to-have. Without it, agents silently lose
+            critical context and produce confidently wrong answers.</p>
+
+          <h3 id="2-tool-calls-fail-agents-must-not">2. Tool Calls Fail. Agents Must Not.</h3>
+
+          <p>LLMs emit non-deterministic tool calls. A tool might timeout, return
+            a transient error, or simply not exist. Without explicit bounds, an
+            agent can loop forever retrying the same failing call, or crash on the
+            first error.</p>
+
+          <p>The framework addresses this at two levels:</p>
+
+          <ul>
+            <li><strong>ToolExecutionManager</strong> wraps every tool call with
+              structured error handling. Errors carry an <code>ErrorCode</code>
+              enum and a <code>retryable</code> flag &mdash; the manager decides whether
+              to retry with exponential backoff (configurable via
+              <code>RetryPolicy</code>) without parsing error strings. This is the
+              difference between "try/catch everything" and "let the error type
+              drive control flow."</li>
+            <li><strong>AgentRuntime</strong> enforces a hard
+              <code>max_iterations</code> cap on the ReAct loop. The agent reasons,
+              acts, observes &mdash; but never more than N times. When the cap is hit,
+              the runtime returns the best available answer with a clear signal
+              that the loop exhausted.</li>
+          </ul>
+
+          <p>The result: <strong>deterministic termination</strong>. The agent
+            always finishes. It always produces output. It never hangs.</p>
+
+          <h3 id="3-integrations-must-be-pluggable-not-permanent">3. Integrations Must Be Pluggable, Not Permanent</h3>
+
+          <p>Agent systems talk to model providers (OpenAI, Anthropic, local
+            inference servers), MCP servers (ClickHouse, databases, APIs), and
+            tool backends. Hard-coupling to one provider makes the system fragile.
+            Hard-coupling to all of them makes it unmaintainable.</p>
+
+          <p>The framework uses <strong>abstract interfaces</strong> at every
+            integration boundary:</p>
+
+          <ul>
+            <li><code>ModelClient</code> is a pure virtual class. The host
+              application injects the implementation. The framework assembles
+              context but <strong>never calls the model directly</strong>. This is
+              deliberate &mdash; it keeps the library self-contained, testable without
+              API keys, and provider-agnostic.</li>
+            <li><code>IMCPClient</code> supports both HTTP (for cloud MCP servers)
+              and stdio (for local processes). The transport is selected at runtime
+              via configuration, not compile-time flags. Adding a new transport
+              means implementing one interface &mdash; not rewriting the agent loop.</li>
+            <li><code>ToolHandler</code> is a
+              <code>std::function&lt;std::string(const std::string&amp;)&gt;</code>.
+              Tools are registered by name and dispatched by string key. No virtual
+              inheritance, no template metaprogramming &mdash; just a map from names
+              to functions.</li>
+            <li>Skills are <strong>declarative JSON/YAML files</strong> dropped into
+              a <code>skills/</code> directory. They define instructions, tool
+              schemas, and code templates. No recompilation needed to add
+              capabilities. The <code>SkillRepository</code> parses them at runtime,
+              the <code>SkillEngine</code> activates them, and the
+              <code>AgentContext</code> injects their instructions into the model's
+              system prompt.</li>
+          </ul>
+
+          <h2 id="the-architecture-five-layers-one-loop">The Architecture: Five Layers, One Loop</h2>
+
+          <p>The framework is organized into five layers with clear dependency
+            boundaries. Dependencies flow downward &mdash; upper layers call lower
+            layers, never the reverse.</p>
+
+          <p><img src="images/overview.png" alt="Architecture Overview"
+              title="ai-sdk-ext Architecture"></p>
+
+          <p><strong>Key design patterns at work:</strong></p>
+
+          <ul>
+            <li><strong>Strategy Pattern</strong> &mdash; <code>IMCPClient</code> lets
+              the transport layer (HTTP vs stdio) be swapped at runtime without
+              touching the agent loop. The rest of the system doesn't know or care
+              how MCP calls are delivered.</li>
+            <li><strong>Registry Pattern</strong> &mdash; <code>ToolRegistry</code> maps
+              tool names to handler functions. Tools are registered from skill
+              definitions, then dispatched by string key during the agent loop. This
+              decouples tool declaration from tool execution.</li>
+            <li><strong>Chain of Responsibility</strong> &mdash;
+              <code>ToolExecutionManager</code> applies a pipeline: validate input
+              JSON &rarr; dispatch to handler &rarr; catch structured errors &rarr; decide
+              retry based on error type &rarr; return typed <code>ToolResult</code>. Each
+              stage is independently testable.</li>
+            <li><strong>Hierarchical Configuration</strong> &mdash;
+              <code>ConfigManager</code> resolves settings through a three-level
+              merge: model-specific &rarr; provider-level &rarr; global defaults.
+              Environment variables are interpolated at read time via
+              <code>{VAR_NAME}</code> syntax. One config file drives the entire
+              system.</li>
+            <li><strong>Declarative Plugin System</strong> &mdash; Skills are data, not
+              code. A YAML file defines what tools exist, what instructions the
+              model receives, and what code templates are available. The framework
+              loads and activates them without recompilation.</li>
+          </ul>
+
+          <h2 id="what-this-demonstrates">What This Demonstrates</h2>
+
+          <ul>
+            <li><strong>Deterministic agent loops</strong> with bounded iterations
+              &mdash; no infinite recursion, no runaway costs</li>
+            <li><strong>Token-aware conversation compression</strong> &mdash; tool results
+              preserved verbatim, chat history summarized</li>
+            <li><strong>Declarative skills</strong> &mdash; add capabilities by dropping
+              a YAML file, zero redeployment</li>
+            <li><strong>Structured error handling</strong> with semantic error types
+              and retry semantics &mdash; not try/catch spaghetti</li>
+            <li><strong>Provider-agnostic model integration</strong> &mdash; swap OpenAI,
+              Anthropic, or a local model by implementing one pure virtual
+              class</li>
+            <li><strong>Minimal footprint</strong> &mdash; single CMake build, two
+              runtime dependencies (<code>nlohmann_json</code>,
+              <code>yaml-cpp</code>), C++20, no Python, no virtualenv, no runtime
+              dependency tree</li>
+          </ul>
+
+          <h2 id="the-bigger-picture">The Bigger Picture</h2>
+
+          <p>AI agent orchestration is not a machine learning problem. It is a
+            <strong>systems engineering problem</strong> &mdash; managing state, bounding
+            execution, handling failures gracefully, and composing external services
+            into a reliable pipeline.</p>
+
+          <p>The industry is discovering this the hard way. Python agent
+            frameworks work beautifully in demos and silently fall apart in
+            production &mdash; GC pauses during tool execution, unbounded memory growth
+            in long conversations, dependency conflicts between agent libraries and
+            ML runtimes.</p>
+
+          <p>C++ gives you control over all of it. Not because it is faster &mdash;
+            though it is &mdash; but because it forces you to think about resource
+            ownership, error propagation, and interface boundaries at design time
+            rather than debugging them at 3 AM.</p>
+
+          <p><strong>ai-sdk-ext</strong> is my answer to that challenge. It is a
+            framework built for the production reality of AI agents: unpredictable
+            inputs, bounded resources, and zero tolerance for silent failures.</p>
+
+          <hr>
+
+          <p><em>Built with C++20. Tested against NVIDIA NIM, OpenAI, and local
+              inference servers. Designed to be embedded in larger systems or run
+              standalone.</em></p>
+
+          <p><strong>Repository:</strong> <a href="/">ai-sdk-ext</a> |
+            <strong>Design Docs:</strong> <a href="/">ai-sdk-ext-design/</a></p>
+
+          <ul class="pa0">
+
+          </ul>
+          <div class="mt6 instapaper_ignoref">
+
+          </div>
+        </div>
+
+        <aside class="w-30-l mt6-l">
+
+        </aside>
+
+      </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+      <div class="flex justify-between">
+        <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3"
+          href="/">
+          &copy; Wenhua Wang 2026
+        </a>
+        <div>
+
+          <a href="https://www.linkedin.com/in/wenhua-w-39108190/" target="_blank"
+            class="link-transition linkedin link dib z-999 pt3 pt0-l mr1"
+            title="LinkedIn link" rel="noopener"
+            aria-label="follow on LinkedIn——Opens in a new window">
+            <svg height="32px" style="enable-background:new 0 0 65 65;"
+              version="1.1" viewBox="0 0 65 65" width="32px"
+              xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <path
+                d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z"
+                style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+            </svg>
+
+            <span class="new-window"><svg height="8px"
+                style="enable-background:new 0 0 1000 1000;" version="1.1"
+                viewBox="0 0 1000 1000" width="8px" xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path
+                  d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z"
+                  style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+              </svg>
+            </span></a>
+
+          <a href="https://github.com/bill18" target="_blank"
+            class="link-transition github link dib z-999 pt3 pt0-l mr1"
+            title="Github link" rel="noopener"
+            aria-label="follow on Github——Opens in a new window">
+            <svg height="32px" style="enable-background:new 0 0 512 512;"
+              version="1.1" viewBox="0 0 512 512" width="32px"
+              xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <path
+                d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z" />
+            </svg>
+
+            <span class="new-window"><svg height="8px"
+                style="enable-background:new 0 0 1000 1000;" version="1.1"
+                viewBox="0 0 1000 1000" width="8px" xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path
+                  d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z"
+                  style="fill-rule:evenodd;clip-rule:evenodd;fill:;" />
+              </svg>
+            </span></a>
+
+        </div>
+      </div>
+    </footer>
+
+    <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+  </body>
+</html>
