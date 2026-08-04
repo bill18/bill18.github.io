@@ -1,0 +1,442 @@
+/* ==========================================================================
+   Wenhua Wang - Custom Premium Portfolio Stylesheet
+   Integrating Google Fonts (Inter, Plus Jakarta Sans, Lora, JetBrains Mono)
+   ========================================================================== */
+
+/* --- 1. Global Reset & Typography --- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  background-color: #f8fafc !important; /* Cool slate 50 background */
+  color: #1e293b !important; /* Slate 800 */
+  line-height: 1.625;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: rgba(99, 102, 241, 0.2);
+  color: #4f46e5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  color: #0f172a !important; /* Slate 900 */
+  line-height: 1.25 !important;
+}
+
+/* --- 2. Article Reading Mode & Column Width Fixing --- */
+
+/* Fix the narrow column by expanding w-two-thirds-l when aside is empty */
+article.flex-l.flex-wrap.justify-between.mw8.center.ph3 > div.w-two-thirds-l {
+  width: 100% !important;
+  max-width: 820px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-right: 0 !important;
+  float: none !important;
+}
+
+/* Hide empty sidebar on post detail pages */
+article.flex-l.flex-wrap.justify-between.mw8.center.ph3 > aside.w-30-l {
+  display: none !important;
+}
+
+/* Make sure the main content is nicely padded and formatted */
+div.nested-copy-line-height {
+  font-size: 1.1rem !important;
+  color: #334155 !important;
+}
+
+/* For serif sections in long post articles, apply beautiful Lora typography */
+.serif {
+  font-family: 'Lora', Georgia, Cambria, "Times New Roman", Times, serif !important;
+  font-size: 1.125rem !important; /* Extremely readable font size */
+  line-height: 1.8 !important;
+  color: #334155 !important;
+}
+
+.serif p, .serif li {
+  margin-bottom: 1.5rem !important;
+}
+
+/* Fix main welcome/intro containers */
+article.measure-wide, section.measure-wide {
+  max-width: 780px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+  color: #475569 !important;
+  font-size: 1.2rem !important;
+  line-height: 1.7 !important;
+}
+
+/* Make sure lists inside articles look premium */
+.nested-copy-line-height ul, .nested-copy-line-height ol {
+  padding-left: 1.5rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.nested-copy-line-height li {
+  margin-bottom: 0.5rem !important;
+  padding-left: 0.25rem;
+}
+
+/* --- 3. Header & Navigation Polishing --- */
+header.cover {
+  border-bottom: 1px solid rgba(229, 231, 235, 0.1);
+  overflow: hidden;
+}
+
+/* Dark mode glassmorphism overlay on sunset cover image */
+header.cover .bg-black-60 {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.8)) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Modern navigation link hover styles */
+nav a {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.9;
+}
+
+nav a:hover {
+  opacity: 1 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+nav ul li a {
+  padding: 0.375rem 0.75rem !important;
+  border-radius: 6px;
+  background: transparent;
+}
+
+nav ul li a:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Brand logo styling */
+nav a.hover-white:first-child {
+  font-weight: 700 !important;
+  letter-spacing: -0.03em;
+  background: linear-gradient(120deg, #ffffff, #cbd5e1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* SVG icons in nav/footer */
+nav svg, footer svg {
+  fill: rgba(255, 255, 255, 0.75) !important;
+  transition: all 0.2s ease;
+}
+
+nav a:hover svg, footer a:hover svg {
+  fill: #ffffff !important;
+  transform: scale(1.08);
+}
+
+/* Header main text styling */
+header h1 {
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+  background: linear-gradient(to right, #ffffff, #f1f5f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem !important;
+}
+
+header h2 {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 400 !important;
+  color: #cbd5e1 !important;
+  max-width: 600px !important;
+  line-height: 1.5 !important;
+}
+
+/* --- 4. Cards & Listings Grid Aesthetics --- */
+
+/* Home page list layout */
+.w-70-ns {
+  width: 100% !important;
+  max-width: 900px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Project list cards (home page) */
+article.bb.b--black-10 {
+  border: 1px solid rgba(226, 232, 240, 0.7) !important;
+  background-color: #ffffff !important;
+  border-radius: 14px !important;
+  margin-bottom: 2rem !important;
+  padding: 1.5rem !important;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.02), 0 2px 4px -2px rgba(15, 23, 42, 0.02) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden;
+}
+
+article.bb.b--black-10:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px -3px rgba(15, 23, 42, 0.06), 0 4px 6px -2px rgba(15, 23, 42, 0.02) !important;
+  border-color: rgba(99, 102, 241, 0.25) !important;
+}
+
+article.bb.b--black-10 img {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06) !important;
+  transition: transform 0.3s ease !important;
+}
+
+article.bb.b--black-10 .grow:hover img {
+  transform: scale(1.02) !important;
+}
+
+article.bb.b--black-10 a.color-inherit {
+  color: #0f172a !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1.3rem !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+article.bb.b--black-10 a.color-inherit:hover {
+  color: #4f46e5 !important;
+}
+
+article.bb.b--black-10 .f6 {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 500 !important;
+  color: #64748b !important;
+}
+
+/* Projects grid page (post/index.html) */
+aside.flex-ns.flex-wrap.justify-around.mt5 {
+  display: grid !important;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 3rem !important;
+}
+
+@media screen and (min-width: 30em) {
+  aside.flex-ns.flex-wrap.justify-around.mt5 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media screen and (min-width: 60em) {
+  aside.flex-ns.flex-wrap.justify-around.mt5 {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+aside.flex-ns.flex-wrap.justify-around.mt5 > div.w-30-l {
+  width: 100% !important; /* override w-30-l in grid container */
+  margin-bottom: 0 !important;
+  background-color: #ffffff !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.02), 0 2px 4px -2px rgba(15, 23, 42, 0.02) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: flex;
+  flex-direction: column;
+}
+
+aside.flex-ns.flex-wrap.justify-around.mt5 > div.w-30-l:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.06), 0 10px 10px -5px rgba(15, 23, 42, 0.03) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+aside.flex-ns.flex-wrap.justify-around.mt5 > div.w-30-l .pa4 {
+  padding: 1.75rem !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+aside.flex-ns.flex-wrap.justify-around.mt5 > div.w-30-l .f6 {
+  color: #64748b !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+aside.flex-ns.flex-wrap.justify-around.mt5 > div.w-30-l h1.f3 {
+  font-size: 1.25rem !important;
+  line-height: 1.4 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.75rem !important;
+  font-weight: 700 !important;
+}
+
+aside.flex-ns.flex-wrap.justify-around.mt5 > div.w-30-l h1.f3 a {
+  color: #0f172a !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+aside.flex-ns.flex-wrap.justify-around.mt5 > div.w-30-l h1.f3 a:hover {
+  color: #4f46e5 !important;
+}
+
+aside.flex-ns.flex-wrap.justify-around.mt5 > div.w-30-l .nested-links {
+  color: #475569 !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  margin-top: auto; /* Push description to align nicely */
+}
+
+/* --- 5. Premium "Read More" Button --- */
+a.ba.b--moon-gray.bg-light-gray {
+  background-color: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #4f46e5 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  font-size: 0.8rem !important;
+  padding: 0.4rem 0.8rem !important;
+  transition: all 0.2s ease !important;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  display: inline-flex !important;
+  align-items: center;
+  margin-top: 1rem !important;
+}
+
+a.ba.b--moon-gray.bg-light-gray:hover {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+  border-color: #4f46e5 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+/* --- 6. Table Styling Override --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2.5rem 0;
+  font-size: 0.95rem !important;
+  text-align: left;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  border: 1px solid #e2e8f0;
+}
+
+th {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 600 !important;
+  padding: 14px 18px !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+}
+
+td {
+  padding: 14px 18px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  color: #334155 !important;
+  background-color: #ffffff !important;
+}
+
+tr:last-child td {
+  border-bottom: none !important;
+}
+
+tr:hover td {
+  background-color: #f8fafc !important;
+}
+
+/* --- 7. Code Blocks (Syntax Highlighting Box) --- */
+pre {
+  background: #0f172a !important; /* Dark slate */
+  color: #f8fafc !important;
+  padding: 1.25rem 1.5rem !important;
+  border-radius: 10px !important;
+  overflow-x: auto;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace !important;
+  border: 1px solid #1e293b !important;
+  margin: 1.75rem 0 !important;
+}
+
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace !important;
+  font-size: 0.9em !important;
+  background-color: #f1f5f9;
+  color: #0f172a;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+pre code {
+  background-color: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.7 !important;
+}
+
+/* --- 8. Contact & Simple Tables styling --- */
+body[data-page="contact"] table {
+  max-width: 600px !important;
+  margin: 2rem 0 !important;
+}
+
+body[data-page="contact"] table a {
+  color: #4f46e5 !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  transition: color 0.2s ease;
+}
+
+body[data-page="contact"] table a:hover {
+  text-decoration: underline !important;
+  color: #6366f1 !important;
+}
+
+/* --- 9. Footer Refining --- */
+footer.bg-black {
+  background-color: #0f172a !important; /* Sleek dark slate footer instead of pitch black */
+  border-top: 1px solid #1e293b;
+  padding: 2.5rem 1.5rem !important;
+}
+
+footer a.white-70 {
+  color: #94a3b8 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 500 !important;
+  transition: color 0.2s ease;
+}
+
+footer a.white-70:hover {
+  color: #ffffff !important;
+}
+
+/* --- 10. Image Zoom / Hover Effects --- */
+article img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 2.5rem auto !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05) !important;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+}
